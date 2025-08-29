@@ -16,7 +16,7 @@ const FunnelSection: React.FC = () => {
     const [sectionRef, isVisible] = useVisibility<HTMLDivElement>({threshold: 0.1});
 
     return (
-        <section ref={sectionRef} className="py-24 md:py-32 bg-bg-primary overflow-hidden">
+        <section ref={sectionRef} className="py-24 md:py-32 overflow-hidden">
             <Container>
                 <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
                     {/* Text Content */}
@@ -26,7 +26,7 @@ const FunnelSection: React.FC = () => {
                                 분석에서 설계, 구축까지<br/>함께하는 파트너
                             </h2>
                             <p className="text-body-lg text-text-secondary max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                                APX는 분석으로 끝나지 않습니다. 고객의 목표를 현실로 만들기 위해 Why-How-What에 기반한 체계적인 3단계 프로세스를 통해 아이디어를 실제 성과로 구축합니다.
+                                APX는 분석으로 끝나지 않습니다. <br/>고객의 목표를 현실로 만들기 위해 Why-How-What에 기반한<br/>체계적인 3단계 프로세스를 통해 아이디어를 실제 성과로 구축합니다.
                             </p>
                         </div>
                     </div>

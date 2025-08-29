@@ -29,7 +29,15 @@ const FloatingPortfolioButton: React.FC<FloatingPortfolioButtonProps> = ({ count
                 <span className="
                     absolute left-8
                     text-white font-bold text-body-base whitespace-nowrap
-                    opacity-0 transition-opacity duration-200 delay-150 group-hover:opacity-100
+                    opacity-0
+                    transform
+                    -translate-x-2
+                    transition-all
+                    duration-300
+                    ease-in-out
+                    group-hover:opacity-100
+                    group-hover:translate-x-0
+                    group-hover:delay-150
                 ">
                     나의 솔루션 포트폴리오
                 </span>

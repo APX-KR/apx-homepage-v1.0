@@ -48,7 +48,7 @@ const FrameworkSection: React.FC = () => {
     const [sectionRef, isVisible] = useVisibility<HTMLDivElement>({ threshold: 0.1 });
 
     return (
-        <section ref={sectionRef} className="py-24 md:py-32 bg-bg-secondary overflow-hidden">
+        <section ref={sectionRef} className="py-24 md:py-32 overflow-hidden">
             <Container>
                 <div className={`max-w-4xl text-center mx-auto transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
                     <h2 className="text-h2-mobile md:text-h2-tablet lg:text-h2 font-semibold text-text-primary mb-6 leading-tight tracking-tight-title">
