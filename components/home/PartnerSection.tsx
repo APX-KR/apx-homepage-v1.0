@@ -1,0 +1,70 @@
+
+
+import React, { useState } from 'react';
+import Container from '../common/Container';
+import { useVisibility } from '../../hooks/useVisibility';
+import { useModal } from '../../contexts/ModalContext';
+
+const PartnerSection: React.FC = () => {
+    const [sectionRef, isVisible] = useVisibility<HTMLDivElement>({ threshold: 0.1 });
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const { openContactModal } = useModal();
+    
+    const handleComingSoonClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        setIsPopupOpen(true);
+    };
+
+    return (
+        <>
+            <section className="bg-apx-foundation-beige py-10 md:py-12 lg:py-16 overflow-hidden">
+                <Container ref={sectionRef} className="text-left">
+                    <h2 className={`text-h2-mobile md:text-h2-tablet lg:text-h2 font-semibold text-text-primary leading-tight tracking-tight-title mb-4 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+                        리더가 가장 먼저 찾는 성장 파트너
+                    </h2>
+                    <p className={`text-body-lg text-text-secondary max-w-3xl mb-10 leading-relaxed transition-all duration-1000 ease-out delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+                        단순 해결사가 아닌 생각의 파트너
+                    </p>
+                    <div className={`flex flex-col sm:flex-row justify-start items-center gap-4 transition-all duration-1000 ease-out delay-[400ms] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+                        <a
+                            href="#newsletter"
+                            onClick={handleComingSoonClick}
+                            className="w-full sm:w-auto px-8 py-4 bg-apx-growth-green text-white font-semibold text-body-base leading-none rounded-full border-2 border-transparent hover:bg-transparent hover:text-apx-growth-green hover:border-apx-growth-green hover:-translate-y-0.5 transform transition-all duration-300"
+                        >
+                            뉴스레터 신청하기
+                        </a>
+                    </div>
+                </Container>
+            </section>
+            {isPopupOpen && (
+                <div 
+                    className="fixed inset-0 bg-black bg-opacity-50 z-[100] flex items-center justify-center p-4" 
+                    onClick={() => setIsPopupOpen(false)}
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="popup-title"
+                >
+                    <div 
+                        className="bg-white rounded-2xl soft-shadow-xl w-full max-w-sm text-center p-8" 
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <h3 id="popup-title" className="text-h4 font-semibold text-text-primary mb-4">
+                            준비 중입니다
+                        </h3>
+                        <p className="text-body-base text-text-secondary mb-8">
+                            현재 페이지는 업데이트 준비 중입니다. <br/>곧 좋은 모습으로 찾아뵙겠습니다.
+                        </p>
+                        <button
+                            onClick={() => setIsPopupOpen(false)}
+                            className="w-full sm:w-auto px-8 py-3 bg-apx-growth-green text-white font-semibold text-body-base leading-none rounded-full border-2 border-transparent hover:bg-apx-deep-growth transition-all duration-300"
+                        >
+                            확인
+                        </button>
+                    </div>
+                </div>
+            )}
+        </>
+    );
+};
+
+export default PartnerSection;
