@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Container from './Container';
 import { useModal } from '../../contexts/ModalContext';
@@ -12,7 +11,7 @@ const FooterLink: React.FC<{ href: string, children: React.ReactNode, onClick?: 
 const Footer: React.FC = () => {
     const { openComingSoonPopup } = useModal();
 
-    const handleInsightsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const handleComingSoonClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         openComingSoonPopup();
     };
@@ -35,36 +34,33 @@ const Footer: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Column 2: Solutions */}
+                    {/* Column 2: APX의 관점 */}
                     <div className="lg:col-span-2">
-                        <h3 className="font-semibold text-white mb-4 text-body-base">솔루션</h3>
+                        <h3 className="font-semibold text-white mb-4 text-body-base">APX의 관점</h3>
                         <ul className="space-y-3">
-                            <li><FooterLink href="#">리더십 역량</FooterLink></li>
-                            <li><FooterLink href="#">인재경영</FooterLink></li>
-                            <li><FooterLink href="#">조직운영</FooterLink></li>
-                            <li><FooterLink href="#">문화혁신</FooterLink></li>
-                            <li><FooterLink href="#">성과관리</FooterLink></li>
-                            <li><FooterLink href="#">인사분석</FooterLink></li>
+                            <li><FooterLink href="#">철학</FooterLink></li>
+                            <li><FooterLink href="#">방법론</FooterLink></li>
+                            <li><FooterLink href="#">프로세스</FooterLink></li>
                         </ul>
                     </div>
 
-                    {/* Column 3: Academy */}
+                    {/* Column 3: 프로젝트 솔루션 */}
                     <div className="lg:col-span-2">
-                        <h3 className="font-semibold text-white mb-4 text-body-base">아카데미</h3>
+                        <h3 className="font-semibold text-white mb-4 text-body-base">프로젝트 솔루션</h3>
                         <ul className="space-y-3">
-                            <li><FooterLink href="#">리더십 아카데미</FooterLink></li>
-                            <li><FooterLink href="#">공통역량 아카데미</FooterLink></li>
-                            <li><FooterLink href="#">직무전문 아카데미</FooterLink></li>
-                            <li><FooterLink href="#">조직문화 아카데미</FooterLink></li>
+                            <li><FooterLink href="#">진단과 분석</FooterLink></li>
+                            <li><FooterLink href="#">전략 컨설팅</FooterLink></li>
+                            <li><FooterLink href="#">역량 개발</FooterLink></li>
                         </ul>
                     </div>
 
-                     {/* Column 4: Company */}
+                     {/* Column 4: 회사 */}
                      <div className="lg:col-span-2">
                         <h3 className="font-semibold text-white mb-4 text-body-base">회사</h3>
                         <ul className="space-y-3">
-                             <li><FooterLink href="#" onClick={handleInsightsClick}>인사이트</FooterLink></li>
-                             <li><FooterLink href="#">회사소개</FooterLink></li>
+                             <li><FooterLink href="#" onClick={handleComingSoonClick}>경영지원 서비스</FooterLink></li>
+                             <li><FooterLink href="#" onClick={handleComingSoonClick}>인사이트</FooterLink></li>
+                             <li><FooterLink href="#" onClick={handleComingSoonClick}>회사소개</FooterLink></li>
                         </ul>
                     </div>
                 </div>

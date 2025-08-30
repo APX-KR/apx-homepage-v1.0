@@ -7,7 +7,7 @@ import { useVisibility } from '../../hooks/useVisibility';
 const processSteps = [
     {
         step: "WHY",
-        title: "현황 분석 및 핵심 원인",
+        title: "현황 진단 및 핵심 원인 분석",
         description: "데이터와 인터뷰를 통해<br/>문제의 현상이 아닌 근본적인 원인을 정의합니다."
     },
     {

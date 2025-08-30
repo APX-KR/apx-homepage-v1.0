@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Container from './Container';
 import { useModal } from '../../contexts/ModalContext';
@@ -8,7 +7,7 @@ const NavLink: React.FC<{ href: string; children: React.ReactNode; onClick?: (e:
   <a
     href={href}
     onClick={onClick}
-    className="text-text-secondary hover:text-strategy-blue font-medium text-body-base tracking-tight-title relative group transition-colors duration-300 py-2 leading-tighter"
+    className="text-text-primary hover:text-apx-growth-green font-semibold text-body-lg tracking-tight-title relative group transition-colors duration-300 py-2 leading-tighter"
   >
     {children}
     <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-apx-growth-green group-hover:w-full transition-all duration-300 ease-in-out"></span>
@@ -38,11 +37,18 @@ const Header: React.FC<HeaderProps> = ({ onMegaMenuToggle }) => {
     onMegaMenuToggle(!!activeMenu);
   }, [activeMenu, onMegaMenuToggle]);
 
+  const handleComingSoonClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    openComingSoonPopup();
+  };
+  const handleMegaMenuClick = (e: React.MouseEvent) => e.preventDefault();
+
   const navItems = [
-    { name: '솔루션', href: '#solutions', megaMenuKey: 'solutions' },
-    { name: '아카데미', href: '#academy', megaMenuKey: 'academy' },
-    { name: '인사이트', href: '#insights', onClick: (e: React.MouseEvent) => { e.preventDefault(); openComingSoonPopup(); } },
-    { name: '회사소개', href: '#about' },
+    { name: 'APX의 관점', href: '#', megaMenuKey: 'perspective', onClick: handleMegaMenuClick },
+    { name: '프로젝트 솔루션', href: '#', megaMenuKey: 'projectSolutions', onClick: handleMegaMenuClick },
+    { name: '경영지원 서비스', href: '#', onClick: handleComingSoonClick },
+    { name: '인사이트', href: '#', onClick: handleComingSoonClick },
+    { name: '회사소개', href: '#', onClick: handleComingSoonClick },
   ];
 
   return (
@@ -84,7 +90,16 @@ const Header: React.FC<HeaderProps> = ({ onMegaMenuToggle }) => {
         <div className={`lg:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
             <div className="bg-white border-t border-border-light">
               {navItems.map((item) => (
-                  <a key={item.name} href={item.href} onClick={item.onClick} className="block px-6 py-3 text-body-base font-medium text-text-secondary hover:text-strategy-blue hover:bg-gray-50">{item.name}</a>
+                  <a key={item.name} href={item.href} onClick={(e) => {
+                    // For mobile, items that have a mega menu on desktop will trigger the 'coming soon' popup.
+                    if (item.megaMenuKey) {
+                        e.preventDefault();
+                        openComingSoonPopup();
+                    } else if (item.onClick) {
+                        item.onClick(e);
+                    }
+                    setMobileMenuOpen(false);
+                  }} className="block px-6 py-3 text-body-base font-medium text-text-secondary hover:text-apx-growth-green hover:bg-gray-50">{item.name}</a>
               ))}
               <div className="p-4">
                  <a
