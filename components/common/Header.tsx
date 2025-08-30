@@ -1,11 +1,13 @@
+
 import React, { useState, useEffect } from 'react';
 import Container from './Container';
 import { useModal } from '../../contexts/ModalContext';
 import { megaMenuContent } from './MegaMenuContent';
 
-const NavLink: React.FC<{ href: string; children: React.ReactNode }> = ({ href, children }) => (
+const NavLink: React.FC<{ href: string; children: React.ReactNode; onClick?: (e: React.MouseEvent) => void; }> = ({ href, children, onClick }) => (
   <a
     href={href}
+    onClick={onClick}
     className="text-text-secondary hover:text-strategy-blue font-medium text-body-base tracking-tight-title relative group transition-colors duration-300 py-2 leading-tighter"
   >
     {children}
@@ -18,7 +20,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ onMegaMenuToggle }) => {
-  const { openContactModal } = useModal();
+  const { openContactModal, openComingSoonPopup } = useModal();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -39,8 +41,7 @@ const Header: React.FC<HeaderProps> = ({ onMegaMenuToggle }) => {
   const navItems = [
     { name: '솔루션', href: '#solutions', megaMenuKey: 'solutions' },
     { name: '아카데미', href: '#academy', megaMenuKey: 'academy' },
-    { name: '인사이트', href: '#insights' },
-    { name: '성공사례', href: '#cases' },
+    { name: '인사이트', href: '#insights', onClick: (e: React.MouseEvent) => { e.preventDefault(); openComingSoonPopup(); } },
     { name: '회사소개', href: '#about' },
   ];
 
@@ -54,7 +55,7 @@ const Header: React.FC<HeaderProps> = ({ onMegaMenuToggle }) => {
           <nav className="hidden lg:flex items-center gap-10">
             {navItems.map((item) => (
               <div key={item.name} onMouseEnter={() => setActiveMenu(item.megaMenuKey || null)}>
-                <NavLink href={item.href}>{item.name}</NavLink>
+                <NavLink href={item.href} onClick={item.onClick}>{item.name}</NavLink>
               </div>
             ))}
           </nav>
@@ -83,7 +84,7 @@ const Header: React.FC<HeaderProps> = ({ onMegaMenuToggle }) => {
         <div className={`lg:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
             <div className="bg-white border-t border-border-light">
               {navItems.map((item) => (
-                  <a key={item.name} href={item.href} className="block px-6 py-3 text-body-base font-medium text-text-secondary hover:text-strategy-blue hover:bg-gray-50">{item.name}</a>
+                  <a key={item.name} href={item.href} onClick={item.onClick} className="block px-6 py-3 text-body-base font-medium text-text-secondary hover:text-strategy-blue hover:bg-gray-50">{item.name}</a>
               ))}
               <div className="p-4">
                  <a

@@ -28,11 +28,21 @@ const HeroSection: React.FC = () => {
                     <div className="relative z-10 lg:w-3/5 text-left flex flex-col justify-end">
                         <div>
                             <h1 className={`text-h1-mobile md:text-h1-tablet lg:text-h1 font-bold text-white leading-tight tracking-tight-title mb-6 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-                                조직의 잠재력을<br />
-                                성과로 바꾸는 성장 아키텍트
+                                <span className="md:hidden">
+                                    조직의 잠재력을<br />성과로 바꾸는<br />성장 아키텍처
+                                </span>
+                                <span className="hidden md:inline">
+                                    조직의 잠재력을<br />
+                                    성과로 바꾸는 성장 아키텍처
+                                </span>
                             </h1>
                             <p className={`text-body-base md:text-body-lg text-gray-200 max-w-xl mb-10 leading-relaxed transition-all duration-1000 ease-out delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-                                문제가 아니라 원인에, 캠페인이 아니라 시스템에 집중합니다.
+                                <span className="md:hidden">
+                                    문제가 아니라 원인에,<br />캠페인이 아니라 시스템에<br />집중합니다.
+                                </span>
+                                <span className="hidden md:inline">
+                                    문제가 아니라 원인에, 캠페인이 아니라 시스템에 집중합니다.
+                                </span>
                             </p>
                         </div>
                         <div className={`flex flex-col sm:flex-row gap-4 transition-all duration-1000 ease-out delay-[400ms] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>

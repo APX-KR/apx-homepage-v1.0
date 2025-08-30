@@ -1,13 +1,22 @@
+
 import React from 'react';
 import Container from './Container';
+import { useModal } from '../../contexts/ModalContext';
 
-const FooterLink: React.FC<{ href: string, children: React.ReactNode }> = ({ href, children }) => (
-    <a href={href} className="text-white hover:opacity-80 transition-opacity duration-300 text-body-sm">
+const FooterLink: React.FC<{ href: string, children: React.ReactNode, onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void }> = ({ href, children, onClick }) => (
+    <a href={href} onClick={onClick} className="text-white hover:opacity-80 transition-opacity duration-300 text-body-sm">
         {children}
     </a>
 );
 
 const Footer: React.FC = () => {
+    const { openComingSoonPopup } = useModal();
+
+    const handleInsightsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        openComingSoonPopup();
+    };
+
     return (
         <footer className="bg-apx-deep-growth text-white">
             <Container className="py-16">
@@ -54,8 +63,7 @@ const Footer: React.FC = () => {
                      <div className="lg:col-span-2">
                         <h3 className="font-semibold text-white mb-4 text-body-base">회사</h3>
                         <ul className="space-y-3">
-                             <li><FooterLink href="#">인사이트</FooterLink></li>
-                             <li><FooterLink href="#">성공사례</FooterLink></li>
+                             <li><FooterLink href="#" onClick={handleInsightsClick}>인사이트</FooterLink></li>
                              <li><FooterLink href="#">회사소개</FooterLink></li>
                         </ul>
                     </div>

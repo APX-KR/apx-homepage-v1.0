@@ -6,6 +6,9 @@ interface ModalContextType {
     openContactModal: (initialMessage?: string) => void;
     closeContactModal: () => void;
     initialMessage: string;
+    isComingSoonPopupOpen: boolean;
+    openComingSoonPopup: () => void;
+    closeComingSoonPopup: () => void;
 }
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
@@ -13,6 +16,7 @@ const ModalContext = createContext<ModalContextType | undefined>(undefined);
 export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [isContactModalOpen, setContactModalOpen] = useState(false);
     const [initialMessage, setInitialMessage] = useState('');
+    const [isComingSoonPopupOpen, setComingSoonPopupOpen] = useState(false);
 
     const openContactModal = (message = '') => {
         setInitialMessage(message);
@@ -24,8 +28,12 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         setInitialMessage(''); // Reset message on close
     };
 
+    const openComingSoonPopup = () => setComingSoonPopupOpen(true);
+    const closeComingSoonPopup = () => setComingSoonPopupOpen(false);
+
+
     return (
-        <ModalContext.Provider value={{ isContactModalOpen, openContactModal, closeContactModal, initialMessage }}>
+        <ModalContext.Provider value={{ isContactModalOpen, openContactModal, closeContactModal, initialMessage, isComingSoonPopupOpen, openComingSoonPopup, closeComingSoonPopup }}>
             {children}
         </ModalContext.Provider>
     );

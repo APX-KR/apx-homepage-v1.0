@@ -1,6 +1,7 @@
 
 
 
+
 import React, { useState, useMemo } from 'react';
 import Container from '../common/Container';
 import { useModal } from '../../contexts/ModalContext';
@@ -95,10 +96,10 @@ const InteractiveSection: React.FC = () => {
             <Container ref={sectionRef}>
                 <div className={`text-center max-w-4xl mx-auto mb-12 md:mb-16 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
                     <h2 className="text-h2-mobile md:text-h2-tablet lg:text-h2 font-semibold text-text-primary mb-4 leading-tight tracking-tight-title">
-                        당신의 성장 과제에 필요한 솔루션을 찾아보세요
+                        우리 조직의 성장에 필요한 솔루션을 찾아보세요
                     </h2>
                     <p className="text-body-lg text-text-secondary leading-relaxed">
-                        APX의 모든 솔루션은 5가지 핵심 질문에 대한 답을 제공하기 위해 존재합니다.<br/>해결하고 싶은 과제를 선택하거나, 찾고 있는 솔루션의 키워드를 직접 입력해 보세요.
+                        조직의 성장을 위해 가장 먼저 논의하고 싶은 주제를 선택하거나, 관련 키워드를 입력해 보세요.<br />선택한 솔루션이 우리의 첫 번째 대화 주제가 됩니다.
                     </p>
                 </div>
 
