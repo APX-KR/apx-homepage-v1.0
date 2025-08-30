@@ -17,10 +17,12 @@ const PartnerSection: React.FC = () => {
         <section className="bg-apx-foundation-beige py-10 md:py-12 lg:py-16 overflow-hidden">
             <Container ref={sectionRef} className="text-left">
                 <h2 className={`text-h2-mobile md:text-h2-tablet lg:text-h2 font-semibold text-text-primary leading-tight tracking-tight-title mb-4 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-                    리더가 가장 먼저 찾는 성장 파트너
+                    <span className="md:hidden">리더가 가장 먼저 찾는<br />성장 파트너</span>
+                    <span className="hidden md:inline">리더가 가장 먼저 찾는 성장 파트너</span>
                 </h2>
                 <p className={`text-body-lg text-text-secondary max-w-3xl mb-10 leading-relaxed transition-all duration-1000 ease-out delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-                    단순 해결사가 아닌 생각의 파트너
+                    <span className="md:hidden">단순 해결사가 아닌<br />생각의 파트너</span>
+                    <span className="hidden md:inline">단순 해결사가 아닌 생각의 파트너</span>
                 </p>
                 <div className={`flex flex-col sm:flex-row justify-start items-center gap-4 transition-all duration-1000 ease-out delay-[400ms] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
                     <a

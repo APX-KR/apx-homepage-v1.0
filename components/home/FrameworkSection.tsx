@@ -99,8 +99,8 @@ const FrameworkSection: React.FC = () => {
                         <span className="md:hidden">
                             우리는 조직의 성장 시스템이<br/>
                             모든 단계에서 원활하게 작동하도록,<br/>
-                            4가지 핵심 영역에서 전문적인 솔루션을<br/>
-                            제공합니다.
+                            4가지 핵심 영역에서<br/>
+                            전문적인 솔루션을 제공합니다.
                         </span>
                         <span className="hidden md:inline">
                             우리는 조직의 성장 시스템이 모든 단계에서 원활하게 작동하도록,<br /> 4가지 핵심 영역에서 전문적인 솔루션을 제공합니다.

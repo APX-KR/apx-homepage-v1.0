@@ -185,7 +185,8 @@ const ProblemSection: React.FC = () => {
                         <span className="md:hidden">
                             조직은 성장을 가로막는 수많은<br/>
                             복합적인 문제에 직면합니다.<br/>
-                            APX는 문제의 현상이 아닌 근본적인 원인을 해결하여<br/>
+                            APX는 문제의 현상이 아닌<br/>
+                            근본적인 원인을 해결하여<br/>
                             지속가능한 성장을 설계합니다.
                         </span>
                         <span className="hidden md:inline">
