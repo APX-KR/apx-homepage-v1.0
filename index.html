@@ -112,8 +112,9 @@
         text-align: center;
         transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         transform-style: preserve-3d;
+        border-radius: 1.5rem; /* 3xl */
       }
-      .flip-card:hover .flip-card-inner {
+      .flip-card.is-flipped .flip-card-inner {
         transform: rotateY(180deg);
       }
       .flip-card-front, .flip-card-back {
@@ -127,6 +128,24 @@
       }
       .flip-card-back {
         transform: rotateY(180deg);
+        /* Firefox scrollbar style */
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+      }
+
+      /* Modern Scrollbar for Webkit browsers (Chrome, Safari) */
+      .flip-card-back::-webkit-scrollbar {
+        width: 6px;
+      }
+      .flip-card-back::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .flip-card-back::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.4);
+        border-radius: 10px;
+      }
+      .flip-card-back::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(255, 255, 255, 0.6);
       }
     </style>
   <script type="importmap">

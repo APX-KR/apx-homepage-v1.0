@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from '../common/Container';
 import { useVisibility } from '../../hooks/useVisibility';
 
@@ -18,14 +18,14 @@ const problems = [
             gradient: "bg-gradient-to-br from-leadership-navy to-strategy-blue"
         },
         back: {
-            painPointsTitle: "혹시 이런 고민을 하고 계신가요?",
+            painPointsTitle: "혹시 이런 고민을 하시나요?",
             painPoints: [
                 "리더들의 의사결정이 너무 느리고<br />자주 번복됩니다.",
                 "다음 세대를 이끌어갈<br />리더가 보이지 않습니다.",
                 "팀장들이 팀원들을 제대로<br />이끌지 못하는 것 같습니다.",
                 "급변하는 환경에 리더들이<br />적응하지 못하고 있습니다."
             ],
-            solutionTitle: "APX는 이런 솔루션으로 돕습니다",
+            solutionTitle: "APX는 이렇게 돕습니다",
             solutions: [
                 "리더십 역량 모델링 및 역량 진단",
                 "직급별 리더십 프로그램",
@@ -49,14 +49,14 @@ const problems = [
             gradient: "bg-gradient-to-br from-process-gray to-gray-700"
         },
         back: {
-            painPointsTitle: "혹시 이런 고민을 하고 계신가요?",
+            painPointsTitle: "혹시 이런 고민을 하시나요?",
             painPoints: [
                 "누가 무슨 일을 하는지 불분명해<br />책임 소재가 애매합니다.",
                 "부서 간 협업이 잘 되지 않고<br />서로 떠넘기기 바쁩니다.",
                 "불필요한 회의와 보고 때문에<br />정작 중요한 일에 쓸 시간이 없습니다.",
                 "전략은 좋은데, 실행 단계에서<br />항상 문제가 발생합니다."
             ],
-            solutionTitle: "APX는 이런 솔루션으로 돕습니다",
+            solutionTitle: "APX는 이렇게 돕습니다",
             solutions: [
                 "조직 구조 진단 및 재설계",
                 "직무분석 및 적정인력 산정",
@@ -80,14 +80,14 @@ const problems = [
             gradient: "bg-gradient-to-br from-performance-green to-apx-deep-growth"
         },
         back: {
-            painPointsTitle: "혹시 이런 고민을 하고 계신가요?",
+            painPointsTitle: "혹시 이런 고민을 하시나요?",
             painPoints: [
                 "우리 회사에 꼭 필요한 인재를<br />뽑기가 너무 힘듭니다.",
                 "애써 뽑은 좋은 인재들이<br />자꾸 회사를 떠납니다.",
                 "평가와 보상이 공정하지 않다는<br />불만이 많습니다.",
                 "직원들이 성장하고 있다는 느낌을<br />받지 못하는 것 같습니다."
             ],
-            solutionTitle: "APX는 이런 솔루션으로 돕습니다",
+            solutionTitle: "APX는 이렇게 돕습니다",
             solutions: [
                 "채용 프로세스 컨설팅 및 면접관 교육",
                 "핵심인재 유지 및 육성 전략 수립",
@@ -111,14 +111,14 @@ const problems = [
             gradient: "bg-gradient-to-br from-culture-coral to-red-500"
         },
         back: {
-            painPointsTitle: "혹시 이런 고민을 하고 계신가요?",
+            painPointsTitle: "혹시 이런 고민을 하시나요?",
             painPoints: [
                 "회사의 핵심가치가 구호로만 존재하고,<br />실제 행동으로 이어지지 않습니다.",
                 "조직 내 소통이 단절되어 있고,<br />중요한 정보가 공유되지 않습니다.",
                 "구성원들의 주인의식이나 열정이<br />부족하다고 느껴집니다.",
                 "세대 간의 가치관 차이로 인한<br />갈등이 점점 심해집니다."
             ],
-            solutionTitle: "APX는 이런 솔루션으로 돕습니다",
+            solutionTitle: "APX는 이렇게 돕습니다",
             solutions: [
                 "조직문화 진단 및 혁신 로드맵 설계",
                 "핵심가치 내재화 워크숍 및 프로그램",
@@ -142,14 +142,14 @@ const problems = [
             gradient: "bg-gradient-to-br from-talent-orange to-orange-600"
         },
         back: {
-            painPointsTitle: "혹시 이런 고민을 하고 계신가요?",
+            painPointsTitle: "혹시 이런 고민을 하시나요?",
             painPoints: [
                 "회사의 목표와 개인의 목표가<br />따로 놀고 있습니다.",
                 "평가가 리더의 주관적인 감으로<br />이루어지는 것 같습니다.",
                 "열심히 일한 사람이 제대로<br />보상받지 못하는 구조입니다.",
                 "직감이나 경험에만 의존해<br />중요한 의사결정을 내리고 있습니다."
             ],
-            solutionTitle: "APX는 이런 솔루션으로 돕습니다",
+            solutionTitle: "APX는 이렇게 돕습니다",
             solutions: [
                 "OKR/MBO 목표관리 체계 설계 및 도입",
                 "직무중심 성과체계 설계 및 도입",
@@ -163,6 +163,15 @@ const problems = [
 
 const ProblemSection: React.FC = () => {
     const [sectionRef, isVisible] = useVisibility<HTMLDivElement>({ threshold: 0.1 });
+    const [flippedStates, setFlippedStates] = useState(() => Array(problems.length).fill(false));
+
+    const handleFlip = (index: number) => {
+        setFlippedStates(prevStates => {
+            const newStates = [...prevStates];
+            newStates[index] = !newStates[index];
+            return newStates;
+        });
+    };
 
     return (
         <section ref={sectionRef} className="py-24 md:py-32 overflow-hidden">
@@ -180,13 +189,24 @@ const ProblemSection: React.FC = () => {
                     {problems.map((problem, index) => (
                         <div
                             key={index}
-                            className={`flip-card h-[480px] transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+                            className={`flip-card h-[480px] transition-all duration-700 ease-out cursor-pointer ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'} ${flippedStates[index] ? 'is-flipped' : ''}`}
                             style={{ transitionDelay: `${150 + index * 100}ms` }}
+                            onClick={() => handleFlip(index)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    handleFlip(index);
+                                }
+                            }}
+                            role="button"
+                            tabIndex={0}
+                            aria-pressed={flippedStates[index]}
+                            aria-label={`${problem.front.title} 카드, ${flippedStates[index] ? '요약 보기' : '자세히 보기'}`}
                         >
                             <div className="flip-card-inner soft-shadow-lg">
                                 {/* Front of the card */}
                                 <div className={`flip-card-front ${problem.front.gradient} text-white flex flex-col text-left`}>
-                                    <div className="p-6 flex-grow">
+                                    <div className="py-6 px-5 flex-grow">
                                         <div className="mb-6">
                                             <div className="bg-white/20 rounded-full flex items-center justify-center w-[60px] h-[60px]">
                                                 {typeof problem.front.icon === 'string' ? (
@@ -205,16 +225,17 @@ const ProblemSection: React.FC = () => {
                                           ))}
                                       </div>
                                     </div>
-                                    <div className="bg-black/20 backdrop-blur-sm p-6 pt-4">
+                                    <div className="bg-black/20 backdrop-blur-sm pt-4 pb-6 px-5">
                                         <p className="text-body-sm text-white/90 leading-relaxed whitespace-pre-line">{problem.front.importance}</p>
-                                        <div className="opacity-70 mt-3">
+                                        <div className="opacity-70 mt-3 flex items-center gap-1">
                                             <span className="text-caption font-medium">자세히 보기</span>
+                                            <span className="text-caption font-medium">&gt;&gt;</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Back of the card */}
-                                <div className={`flip-card-back ${problem.back.gradient} text-white pt-10 px-6 pb-10 flex flex-col justify-start text-left overflow-y-auto`}>
+                                <div className={`flip-card-back ${problem.back.gradient} text-white pt-10 px-5 pb-10 flex flex-col justify-start text-left overflow-y-auto`}>
                                     <div>
                                         <h4 className="text-lg font-bold text-white mb-3">
                                           {problem.back.painPointsTitle}
