@@ -151,7 +151,7 @@ const problems = [
             ],
             solutionTitle: "APX는 이렇게 돕습니다",
             solutions: [
-                "OKR/MBO 목표관리 체계 설계 및 도입",
+                "MBO/OKR 목표관리 체계 설계",
                 "직무중심 성과체계 설계 및 도입",
                 "평가자 역량향상 프로그램"
             ],
@@ -218,7 +218,7 @@ const ProblemSection: React.FC = () => {
                                         </div>
                                         <p className="text-caption font-semibold uppercase tracking-wider text-white/80 mb-2">{problem.front.engTitle}</p>
                                         <h3 className="text-h4 font-bold mb-2">{problem.front.title}</h3>
-                                        <p className="text-body-lg mb-4 leading-snug">{problem.front.question}</p>
+                                        <p className="text-body-lg mb-4 leading-snug tracking-tight-title">{problem.front.question}</p>
                                         <div className="flex flex-wrap gap-2 mb-4">
                                           {problem.front.keywords.map((keyword, i) => (
                                               <span key={i} className="bg-white/20 px-3 py-1 rounded-full text-caption font-medium">{keyword}</span>
