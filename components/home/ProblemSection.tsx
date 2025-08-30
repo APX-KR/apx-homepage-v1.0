@@ -45,7 +45,7 @@ const problems = [
             title: "조직구조",
             question: "어떤 구조로 일할 것인가?",
             keywords: ["#조직구조", "#R&R", "#프로세스"],
-            importance: "최적의 구조는 뛰어난 전략이\n탁월한 실행으로 이어지는 고속도로가 됩니다.",
+            importance: "최적의 구조는 뛰어난 전략을\n탁월한 실행으로 잇는 고속도로가 됩니다.",
             gradient: "bg-gradient-to-br from-process-gray to-gray-700"
         },
         back: {
