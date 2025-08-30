@@ -178,10 +178,20 @@ const ProblemSection: React.FC = () => {
             <Container className="max-w-[1600px]">
                 <div className={`text-center max-w-4xl mx-auto transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
                     <h2 className="text-h2-mobile md:text-h2-tablet lg:text-h2 font-semibold text-text-primary mb-6 leading-tight tracking-tight-title">
-                        이런 고민, 하고 계신가요?
+                        <span className="md:hidden">이런 고민,<br/>하고 계신가요?</span>
+                        <span className="hidden md:inline">이런 고민, 하고 계신가요?</span>
                     </h2>
                     <p className="text-body-lg text-text-secondary leading-relaxed">
-                        조직은 성장을 가로막는 수많은 복합적인 문제에 직면합니다.<br />APX는 문제의 현상이 아닌 근본적인 원인을 해결하여 지속가능한 성장을 설계합니다.
+                        <span className="md:hidden">
+                            조직은 성장을 가로막는 수많은<br/>
+                            복합적인 문제에 직면합니다.<br/>
+                            APX는 문제의 현상이 아닌 근본적인 원인을 해결하여<br/>
+                            지속가능한 성장을 설계합니다.
+                        </span>
+                        <span className="hidden md:inline">
+                            조직은 성장을 가로막는 수많은 복합적인 문제에 직면합니다.<br />
+                            APX는 문제의 현상이 아닌 근본적인 원인을 해결하여 지속가능한 성장을 설계합니다.
+                        </span>
                     </p>
                 </div>
 

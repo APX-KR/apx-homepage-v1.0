@@ -41,10 +41,21 @@ const FunnelSection: React.FC = () => {
                     <div className="lg:w-1/2 text-center lg:text-left">
                         <div className={`transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
                             <h2 className="text-h2-mobile md:text-h2-tablet lg:text-h2 font-semibold text-text-primary mb-6 leading-tight tracking-tight-title">
-                                분석에서 설계, 구축까지<br/>함께하는 파트너
+                                <span className="md:hidden">분석에서 설계, 구축까지<br/>함께하는 파트너</span>
+                                <span className="hidden md:inline">분석에서 설계, 구축까지 함께하는 파트너</span>
                             </h2>
                             <p className="text-body-lg text-text-secondary max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                                APX는 분석으로 끝나지 않습니다. <br/>고객의 목표를 현실로 만들기 위해 Why-How-What에 기반한<br/>체계적인 3단계 프로세스를 통해 아이디어를 실제 성과로 구축합니다.
+                                <span className="md:hidden">
+                                    APX는 분석으로 끝나지 않습니다.<br/>
+                                    고객의 목표를 현실로 만들기 위해<br/>
+                                    Why-How-What에 기반한 체계적인<br/>
+                                    3단계 프로세스를 통해 아이디어를<br/>
+                                    실제 성과로 구축합니다.
+                                </span>
+                                <span className="hidden md:inline">
+                                    APX는 분석으로 끝나지 않습니다. 고객의 목표를 현실로 만들기 위해<br/>
+                                    Why-How-What에 기반한 체계적인 3단계 프로세스를 통해 아이디어를 실제 성과로 구축합니다.
+                                </span>
                             </p>
                         </div>
                     </div>

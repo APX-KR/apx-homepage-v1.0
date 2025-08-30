@@ -92,10 +92,19 @@ const FrameworkSection: React.FC = () => {
             <Container>
                 <div className={`max-w-4xl text-center mx-auto transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
                     <h2 className="text-h2-mobile md:text-h2-tablet lg:text-h2 font-semibold text-text-primary mb-6 leading-tight tracking-tight-title">
-                        조직의 성장을 완성하는 4가지 솔루션 엔진
+                        <span className="md:hidden">조직의 성장을 완성하는<br/>4가지 솔루션 엔진</span>
+                        <span className="hidden md:inline">조직의 성장을 완성하는 4가지 솔루션 엔진</span>
                     </h2>
                     <p className="text-body-lg text-text-secondary leading-relaxed">
-                        우리는 조직의 성장 시스템이 모든 단계에서 원활하게 작동하도록,<br /> 4가지 핵심 영역에서 전문적인 솔루션을 제공합니다.
+                        <span className="md:hidden">
+                            우리는 조직의 성장 시스템이<br/>
+                            모든 단계에서 원활하게 작동하도록,<br/>
+                            4가지 핵심 영역에서 전문적인 솔루션을<br/>
+                            제공합니다.
+                        </span>
+                        <span className="hidden md:inline">
+                            우리는 조직의 성장 시스템이 모든 단계에서 원활하게 작동하도록,<br /> 4가지 핵심 영역에서 전문적인 솔루션을 제공합니다.
+                        </span>
                     </p>
                 </div>
 
