@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useModal } from '../../contexts/ModalContext';
 import PrivacyPolicyModal from './PrivacyPolicyModal';
 
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzpQ1DFCQkuH4TuoXVBnVUg0HoEASQqODA2AsR2O2DaxO0W_OJJ51o29kPsGopoc8sT4w/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwYoMpTGRJbI2mvZKM0CXwGf8AHa_BfN_Q6tewbxJ0VZyqL6cK770LRSHePgHL3tgAUkg/exec';
 
 const ContactModal: React.FC = () => {
     const { isContactModalOpen, closeContactModal, initialMessage } = useModal();
@@ -25,13 +25,7 @@ const ContactModal: React.FC = () => {
     const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
 
     useEffect(() => {
-        if (initialMessage) {
-            setMessage(initialMessage);
-        }
-    }, [initialMessage]);
-    
-    useEffect(() => {
-        // 모달이 열릴 때 상태 초기화 (초기 메시지는 유지)
+        // When the modal opens, reset its state.
         if (isContactModalOpen) {
             setName('');
             setCompany('');
@@ -45,8 +39,8 @@ const ContactModal: React.FC = () => {
             setIsSubmitting(false);
             setIsSubmitted(false);
             setSubmitError(null);
-            setMessage(initialMessage);
-            setIsPrivacyModalOpen(false); // Close privacy modal when contact modal re-opens
+            setMessage(initialMessage || ''); // Pre-fill message if provided, otherwise reset.
+            setIsPrivacyModalOpen(false);
         }
     }, [isContactModalOpen, initialMessage]);
 
