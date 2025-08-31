@@ -9,30 +9,33 @@ import PerspectivePage from './src/app/perspective/page.tsx';
 import ServicesPage from './src/app/services/page.tsx';
 import SolutionsPage from './src/app/solutions/page.tsx';
 
-import { ModalProvider } from './src/contexts/ModalContext.tsx';
 import { InternalNavigationContext } from './src/contexts/InternalNavigationContext.tsx';
 import RootLayout from './src/components/common/ClientLayoutWrapper.tsx';
-import { SolutionProvider } from './src/contexts/SolutionContext.tsx';
-import { InsightProvider } from './src/contexts/InsightContext.tsx';
 
+/**
+ * The App component is now refactored to act solely as a client-side router.
+ * It uses hash-based routing to be compatible with static file servers,
+ * preventing 404 errors on direct navigation or page reloads.
+ */
 const App = () => {
-    const [currentPath, setCurrentPath] = useState(window.location.pathname);
+    // Read the path from the hash, defaulting to '/'
+    const [currentPath, setCurrentPath] = useState(window.location.hash.substring(1) || '/');
 
     useEffect(() => {
-        const handlePopState = () => {
-            setCurrentPath(window.location.pathname);
+        const handleHashChange = () => {
+            setCurrentPath(window.location.hash.substring(1) || '/');
         };
-        window.addEventListener('popstate', handlePopState);
-        return () => window.removeEventListener('popstate', handlePopState);
+        window.addEventListener('hashchange', handleHashChange);
+        return () => window.removeEventListener('hashchange', handleHashChange);
     }, []);
 
     const navigate = (path: string) => {
-        window.history.pushState({}, '', path);
-        setCurrentPath(path);
-        
+        // Only update the hash, which triggers the hashchange event
+        window.location.hash = path;
+
+        // The scroll logic is now triggered by the path change
         const hash = path.split('#')[1];
 
-        // Use a small timeout to let React render the page before we try to scroll.
         setTimeout(() => {
             if (hash) {
                 const element = document.getElementById(hash);
@@ -53,11 +56,18 @@ const App = () => {
             }
         }, 100);
     };
+    
+    // Auto-scroll to top when the main path changes (excluding sub-anchor changes)
+    useEffect(() => {
+        const mainPath = currentPath.split('#')[0];
+        // This effect will run whenever the main path changes
+        document.documentElement.scrollTo(0, 0);
+    }, [currentPath.split('#')[0]]);
 
     const renderPage = () => {
         // Extract the main path without any # sub-anchors
         const cleanPath = currentPath.split('#')[0];
-        const pathParts = cleanPath.split('/').filter(p => p); // e.g., ['insights', 'my-first-article']
+        const pathParts = cleanPath.split('/').filter(p => p);
 
         if (pathParts[0] === 'insights' && pathParts.length === 2) {
             const slug = pathParts[1];
@@ -75,7 +85,6 @@ const App = () => {
                 return <ServicesPage />;
             case '/solutions':
                 return <SolutionsPage />;
-            case '':
             case '/':
             default:
                 return <Home />;
@@ -83,13 +92,9 @@ const App = () => {
     };
 
     return (
-        <ModalProvider>
-            <InternalNavigationContext.Provider value={{ navigate }}>
-                <RootLayout>
-                    {renderPage()}
-                </RootLayout>
-            </InternalNavigationContext.Provider>
-        </ModalProvider>
+        <InternalNavigationContext.Provider value={{ navigate }}>
+            {renderPage()}
+        </InternalNavigationContext.Provider>
     );
 };
 
@@ -99,11 +104,9 @@ if (container) {
     const root = createRoot(container);
     root.render(
         <React.StrictMode>
-            <SolutionProvider>
-                <InsightProvider>
-                    <App />
-                </InsightProvider>
-            </SolutionProvider>
+            <RootLayout>
+                <App />
+            </RootLayout>
         </React.StrictMode>
     );
 }

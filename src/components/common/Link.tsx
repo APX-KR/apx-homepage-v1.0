@@ -4,14 +4,17 @@ import { useInternalNavigation } from '../../contexts/InternalNavigationContext.
 const Link = ({ href, children, ...props }: React.ComponentPropsWithoutRef<'a'>) => {
     const { navigate } = useInternalNavigation();
 
+    const isExternal = props.target === '_blank' || !href?.startsWith('/');
+    const hashHref = isExternal ? href : `#${href}`;
+
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         // Allow ctrl/cmd+click to open in new tab or right click
         if (e.metaKey || e.ctrlKey || e.button !== 0) {
             return;
         }
 
-        // Prevent navigation for external links or links with targets
-        if(props.target === '_blank' || !href?.startsWith('/')) {
+        // Prevent navigation for external links
+        if(isExternal) {
             return;
         }
 
@@ -27,7 +30,7 @@ const Link = ({ href, children, ...props }: React.ComponentPropsWithoutRef<'a'>)
     };
 
     return (
-        <a href={href} onClick={handleClick} {...props}>
+        <a href={hashHref} onClick={handleClick} {...props}>
             {children}
         </a>
     );

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import Header from './Header.tsx';
 import Footer from './Footer.tsx';
-import { useModal } from '../../contexts/ModalContext.tsx';
+import { useModal, ModalProvider } from '../../contexts/ModalContext.tsx';
 import ContactModal from './ContactModal.tsx';
 import SolutionDetailModal from './SolutionDetailModal.tsx';
+import { SolutionProvider } from '../../contexts/SolutionContext.tsx';
+import { InsightProvider } from '../../contexts/InsightContext.tsx';
+
 
 const ComingSoonPopup = () => {
     const { isComingSoonPopupOpen, closeComingSoonPopup } = useModal();
@@ -41,9 +44,9 @@ const ComingSoonPopup = () => {
     );
 };
 
-// Renamed from ClientLayoutWrapper to RootLayout to better reflect its role as the application's root shell,
-// aligning with modern framework conventions (e.g., Next.js's layout.tsx).
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+// This component provides the application shell and global modals. It's wrapped
+// by the necessary context providers to function correctly.
+const AppShell = ({ children }: { children: React.ReactNode }) => {
     const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
     
     return (
@@ -57,5 +60,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <ComingSoonPopup />
             <SolutionDetailModal />
         </div>
+    );
+};
+
+
+// This component has been refactored into a true RootLayout, analogous to `layout.tsx`
+// in a Next.js App Router setup. It's responsible for composing all global context
+// providers, ensuring that state is available throughout the entire application.
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+    return (
+        <SolutionProvider>
+            <InsightProvider>
+                <ModalProvider>
+                    <AppShell>
+                        {children}
+                    </AppShell>
+                </ModalProvider>
+            </InsightProvider>
+        </SolutionProvider>
     );
 }
