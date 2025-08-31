@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import Container from '../../components/common/Container';
 import PageHeader from '../../components/common/PageHeader';
@@ -56,14 +54,4 @@ export default function AboutPage() {
                 <h3 className="text-h5 font-bold text-talent-orange mb-3">파트너십</h3>
                 <p className="text-body-base text-text-secondary break-keep">정답을 주기보다, 고객과 함께 최적의 답을 찾아가는 과정을 중시합니다.</p>
               </div>
-              <div className="bg-white p-8 rounded-2xl soft-shadow-md">
-                <h3 className="text-h5 font-bold text-performance-green mb-3">지속가능성</h3>
-                <p className="text-body-base text-text-secondary break-keep">일회성 캠페인이 아닌, 조직에 내재화되어 계속 작동하는 시스템을 구축합니다.</p>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
-    </>
-  );
-}
+              <div
