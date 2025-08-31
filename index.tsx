@@ -29,16 +29,15 @@ const App = () => {
         return () => window.removeEventListener('hashchange', handleHashChange);
     }, []);
 
-    const navigate = (path: string) => {
-        // Only update the hash, which triggers the hashchange event
-        window.location.hash = path;
+    // Unified scroll handling logic. This effect runs whenever the path changes.
+    useEffect(() => {
+        // The path might contain a page route and an anchor, e.g., "/solutions#strategy"
+        const pathParts = currentPath.split('#');
+        const anchor = pathParts.length > 1 ? pathParts[1] : null;
 
-        // The scroll logic is now triggered by the path change
-        const hash = path.split('#')[1];
-
-        setTimeout(() => {
-            if (hash) {
-                const element = document.getElementById(hash);
+        const handleScroll = () => {
+            if (anchor) {
+                const element = document.getElementById(anchor);
                 if (element) {
                     const headerOffset = 140; // Approximate height of sticky header + padding
                     const elementPosition = element.getBoundingClientRect().top;
@@ -49,21 +48,29 @@ const App = () => {
                         behavior: 'smooth'
                     });
                 } else {
-                    document.documentElement.scrollTo(0, 0);
+                    // If anchor is specified but not found, scroll to top.
+                    window.scrollTo(0, 0);
                 }
             } else {
-                document.documentElement.scrollTo(0, 0);
+                // If no anchor, it's a page navigation, so scroll to top.
+                window.scrollTo(0, 0);
             }
-        }, 100);
+        };
+
+        // Use a timeout to allow the DOM to update before trying to find the element.
+        // This is crucial for when the navigation causes a new component to render.
+        const timer = setTimeout(handleScroll, 100);
+
+        return () => clearTimeout(timer);
+    }, [currentPath]);
+
+
+    const navigate = (path: string) => {
+        // Navigation is simplified to just updating the hash.
+        // The `useEffect` above will handle all scrolling logic consistently.
+        window.location.hash = path;
     };
     
-    // Auto-scroll to top when the main path changes (excluding sub-anchor changes)
-    useEffect(() => {
-        const mainPath = currentPath.split('#')[0];
-        // This effect will run whenever the main path changes
-        document.documentElement.scrollTo(0, 0);
-    }, [currentPath.split('#')[0]]);
-
     const renderPage = () => {
         // Extract the main path without any # sub-anchors
         const cleanPath = currentPath.split('#')[0];
