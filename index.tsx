@@ -11,7 +11,7 @@ import SolutionsPage from './src/app/solutions/page.tsx';
 
 import { ModalProvider } from './src/contexts/ModalContext.tsx';
 import { InternalNavigationContext } from './src/contexts/InternalNavigationContext.tsx';
-import ClientLayoutWrapper from './src/components/common/ClientLayoutWrapper.tsx';
+import RootLayout from './src/components/common/ClientLayoutWrapper.tsx';
 import { SolutionProvider } from './src/contexts/SolutionContext.tsx';
 import { InsightProvider } from './src/contexts/InsightContext.tsx';
 
@@ -85,9 +85,9 @@ const App = () => {
     return (
         <ModalProvider>
             <InternalNavigationContext.Provider value={{ navigate }}>
-                <ClientLayoutWrapper>
+                <RootLayout>
                     {renderPage()}
-                </ClientLayoutWrapper>
+                </RootLayout>
             </InternalNavigationContext.Provider>
         </ModalProvider>
     );

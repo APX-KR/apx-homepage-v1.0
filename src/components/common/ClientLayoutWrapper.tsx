@@ -41,7 +41,9 @@ const ComingSoonPopup = () => {
     );
 };
 
-const AppContent = ({ children }: { children: React.ReactNode }) => {
+// Renamed from ClientLayoutWrapper to RootLayout to better reflect its role as the application's root shell,
+// aligning with modern framework conventions (e.g., Next.js's layout.tsx).
+export default function RootLayout({ children }: { children: React.ReactNode }) {
     const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
     
     return (
@@ -55,11 +57,5 @@ const AppContent = ({ children }: { children: React.ReactNode }) => {
             <ComingSoonPopup />
             <SolutionDetailModal />
         </div>
-    );
-}
-
-export default function ClientLayoutWrapper({ children }: { children: React.ReactNode }) {
-    return (
-        <AppContent>{children}</AppContent>
     );
 }
