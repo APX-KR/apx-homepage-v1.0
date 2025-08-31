@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import Container from '../../components/common/Container.tsx';
-import PageHeader from '../../components/common/PageHeader.tsx';
-import { useModal } from '../../contexts/ModalContext.tsx';
-import { useSolutions } from '../../contexts/SolutionContext.tsx';
-import FloatingPortfolioButton from '../../components/common/FloatingPortfolioButton.tsx';
-import PortfolioModal from '../../components/common/PortfolioModal.tsx';
-import { Solution } from '../../types.ts';
+import Container from '../components/common/Container.tsx';
+import PageHeader from '../components/common/PageHeader.tsx';
+import { useModal } from '../contexts/ModalContext.tsx';
+import { useSolutions } from '../contexts/SolutionContext.tsx';
+import FloatingPortfolioButton from '../components/common/FloatingPortfolioButton.tsx';
+import PortfolioModal from '../components/common/PortfolioModal.tsx';
+import { Solution } from '../types.ts';
 
 const qCategoryDetails = {
     '리더십': { label: '리더십', bg: 'bg-strategy-blue/10', text: 'text-strategy-blue' },

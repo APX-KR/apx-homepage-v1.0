@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from './Link.tsx';
 
 const PerspectiveMegaMenu = () => {
     return (
@@ -28,31 +28,31 @@ const ProjectSolutionsMegaMenu = () => {
                 <div>
                     <h3 className="text-h5 font-bold text-text-primary mb-4">진단과 분석</h3>
                     <ul className="space-y-3 mt-4">
-                        <li><Link href='/solutions#diagnose-structure' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">조직구조 진단</Link></li>
-                        <li><Link href='/solutions#diagnose-culture' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">조직문화 진단</Link></li>
-                        <li><Link href='/solutions#diagnose-leadership' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">리더십 코어 역량 진단</Link></li>
+                        <li><Link href='/solutions#diagnose' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">조직구조 진단</Link></li>
+                        <li><Link href='/solutions#diagnose' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">조직문화 진단</Link></li>
+                        <li><Link href='/solutions#diagnose' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">리더십 코어 역량 진단</Link></li>
                     </ul>
                     <Link href='/solutions#diagnose' className="inline-block text-body-sm font-bold text-apx-growth-green hover:text-apx-deep-growth mt-4">자세히 보기 &gt;</Link>
                 </div>
                 <div>
                     <h3 className="text-h5 font-bold text-text-primary mb-4">전략 컨설팅</h3>
                     <ul className="space-y-3 mt-4">
-                        <li><Link href='/solutions#strategy-mvc' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">M.V.C 재정립</Link></li>
-                        <li><Link href='/solutions#strategy-org-redesign' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">조직구조 개편 및 R&amp;R 재설계</Link></li>
-                        <li><Link href='/solutions#strategy-role-based-hr' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">직무 중심 인사관리 체계 구축</Link></li>
-                        <li><Link href='/solutions#strategy-workforce-planning' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">전략적 인력계획 수립</Link></li>
-                        <li><Link href='/solutions#strategy-learning-system' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">전사 교육체계 설계</Link></li>
+                        <li><Link href='/solutions#strategy' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">M.V.C 재정립</Link></li>
+                        <li><Link href='/solutions#strategy' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">조직구조 개편 및 R&amp;R 재설계</Link></li>
+                        <li><Link href='/solutions#strategy' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">직무 중심 인사관리 체계 구축</Link></li>
+                        <li><Link href='/solutions#strategy' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">전략적 인력계획 수립</Link></li>
+                        <li><Link href='/solutions#strategy' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">전사 교육체계 설계</Link></li>
                     </ul>
                     <Link href='/solutions#strategy' className="inline-block text-body-sm font-bold text-apx-growth-green hover:text-apx-deep-growth mt-4">자세히 보기 &gt;</Link>
                 </div>
                 <div>
                     <h3 className="text-h5 font-bold text-text-primary mb-4">역량 개발</h3>
                     <ul className="space-y-3 mt-4">
-                        <li><Link href='/solutions#development-new-leader' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">신임 리더 온보딩 프로그램</Link></li>
-                        <li><Link href='/solutions#development-coaching-leadership' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">성장 촉진을 위한 코칭 리더십</Link></li>
-                        <li><Link href='/solutions#development-okr-leadership' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">목표 기반 성과관리 리더십 워크숍</Link></li>
-                        <li><Link href='/solutions#development-onboarding' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">신규/경력 입사자 온보딩 프로그램</Link></li>
-                        <li><Link href='/solutions#development-academy' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">공통역량 아카데미</Link></li>
+                        <li><Link href='/solutions#development' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">신임 리더 온보딩 프로그램</Link></li>
+                        <li><Link href='/solutions#development' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">성장 촉진을 위한 코칭 리더십</Link></li>
+                        <li><Link href='/solutions#development' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">목표 기반 성과관리 리더십 워크숍</Link></li>
+                        <li><Link href='/solutions#development' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">신규/경력 입사자 온보딩 프로그램</Link></li>
+                        <li><Link href='/solutions#development' className="block text-body-base text-text-secondary font-medium hover:text-apx-growth-green">공통역량 아카데미</Link></li>
                     </ul>
                     <Link href='/solutions#development' className="inline-block text-body-sm font-bold text-apx-growth-green hover:text-apx-deep-growth mt-4">자세히 보기 &gt;</Link>
                 </div>

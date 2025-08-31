@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Container from './Container.tsx';
 import { useModal } from '../../contexts/ModalContext.tsx';
 import { megaMenuComponents } from './MegaMenuContent.tsx';
-import Link from 'next/link';
+import Link from './Link.tsx';
 
 const NavLink = ({ path, children, onMouseEnter }: { path: string, children: React.ReactNode, onMouseEnter: () => void }) => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from './Container.tsx';
-import Link from 'next/link';
+import Link from './Link.tsx';
 
 const FooterLink = ({ path, children }: { path: string, children: React.ReactNode }) => {
     return (

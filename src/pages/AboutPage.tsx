@@ -1,6 +1,6 @@
 import React from 'react';
-import Container from '../../components/common/Container.tsx';
-import PageHeader from '../../components/common/PageHeader.tsx';
+import Container from '../components/common/Container.tsx';
+import PageHeader from '../components/common/PageHeader.tsx';
 
 export default function AboutPage() {
   return (
