@@ -5,7 +5,11 @@
   "description": "A modern, responsive website for APX Consulting Inc., showcasing their philosophy, solutions, and expertise in transforming organizational potential into performance.",
   "dependencies": {
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "serve": "^14.2.3"
+  },
+  "scripts": {
+    "start": "serve -s ."
   },
   "comment": "This is a static CSR project. Dependencies are loaded via CDN in index.html. This file is for documentation purposes."
 }
