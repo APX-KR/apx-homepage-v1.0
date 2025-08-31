@@ -2,7 +2,6 @@ import React, { createContext, useState, useContext, ReactNode } from 'react';
 import insightsData from '../data/insights.json';
 import { Insight } from '../types.ts';
 
-// FIX: Define a type for the context value.
 interface InsightContextType {
     insights: Insight[];
     loading: boolean;
@@ -12,7 +11,6 @@ interface InsightContextType {
 const InsightContext = createContext<InsightContextType | undefined>(undefined);
 
 // Sort insights by date in descending order (most recent first) at build time
-// FIX: Type the sorted data and ensure the original array is not mutated.
 const sortedInsights: Insight[] = [...(insightsData as Insight[])].sort((a, b) => {
     const dateA = new Date(a.date.replace(/\./g, '-')).getTime();
     const dateB = new Date(b.date.replace(/\./g, '-')).getTime();
@@ -20,7 +18,6 @@ const sortedInsights: Insight[] = [...(insightsData as Insight[])].sort((a, b) =
 });
 
 export const InsightProvider = ({ children }: { children: ReactNode }) => {
-    // FIX: Type the state variables.
     const [insights] = useState<Insight[]>(sortedInsights);
     const [loading] = useState(false); // Data is now loaded at build time
 

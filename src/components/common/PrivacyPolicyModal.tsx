@@ -1,6 +1,11 @@
 import React from 'react';
 
-const PrivacyPolicyModal = ({ isOpen, onClose }) => {
+interface PrivacyPolicyModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+const PrivacyPolicyModal = ({ isOpen, onClose }: PrivacyPolicyModalProps) => {
     if (!isOpen) return null;
 
     return (
@@ -31,7 +36,7 @@ const PrivacyPolicyModal = ({ isOpen, onClose }) => {
                             <li><strong>필수항목:</strong> 회사명, 부서명, 성함, 연락처, 이메일, 문의 내용</li>
                             <li><strong>선택항목:</strong> 직위, 직책</li>
                         </ul>
-                        <p className="mt-2 p-3 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800">※ 주의: '문의내용' 작성 시, 주민등록번호, 여권번호, 운전면허번호 등 법령에 근거하여 처리가 허용된 경우를 제외한 고유식별정보나, 사상, 신념, 노동조합 가입 여부, 건강 상태 등 민감한 정보가 포함되지 않도록 각별히 유의하여 주시기 바랍니다. 이용자의 부주의로 인한 불필요한 정보 노출에 대해 회사는 원칙적으로 책임을 지지 않습니다.</p>
+                        <p className="mt-2 p-3 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800">※ 주의: '문의내용' 작성 시, 주민등록번호, 여권번호, 운전면허번호 등 법령에 근거하여 처리가 허용된 경우를 제외한 고유식별정보나, 사상, 신념, 노동조합 가입 여부, 건강 상태 등 민감한 정보가 포함되지 않도록 각별히 유의하여 주시기 바랍니다. 이용자의 부주의로 인한 불필한 정보 노출에 대해 회사는 원칙적으로 책임을 지지 않습니다.</p>
                     </div>
 
                     <div>

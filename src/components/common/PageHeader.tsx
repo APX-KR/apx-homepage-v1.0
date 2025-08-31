@@ -1,12 +1,11 @@
 import React, { ReactNode } from 'react';
 import Container from './Container.tsx';
 
-// FIX: Add props interface for type safety.
 interface PageHeaderProps {
     title: ReactNode;
     description: ReactNode;
     engTitle: string;
-    backgroundImage?: string; // FIX: Make backgroundImage optional.
+    backgroundImage?: string;
 }
 
 const PageHeader = ({ title, description, engTitle, backgroundImage }: PageHeaderProps) => {

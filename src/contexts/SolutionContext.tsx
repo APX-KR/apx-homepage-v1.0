@@ -2,7 +2,6 @@ import React, { createContext, useState, useContext, ReactNode } from 'react';
 import solutionsData from '../data/solutions.json';
 import { Solution } from '../types.ts';
 
-// FIX: Define a type for the context value.
 interface SolutionContextType {
     solutions: Solution[];
     loading: boolean;
@@ -17,7 +16,6 @@ const SolutionContext = createContext<SolutionContextType | undefined>(undefined
 const activeSolutions: Solution[] = (solutionsData as Solution[]).filter(s => s.status === '활성 (Active)');
 
 export const SolutionProvider = ({ children }: { children: ReactNode }) => {
-    // FIX: Type the state variables.
     const [solutions] = useState<Solution[]>(activeSolutions);
     const [loading] = useState(false); // Data is now loaded at build time
     const [portfolio, setPortfolio] = useState<Solution[]>([]);

@@ -37,13 +37,13 @@ const InteractiveSection = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [activeQ, setActiveQ] = useState('All');
     
-    // FIX: Add generic type to useVisibility to fix ref type error.
     const [sectionRef, isVisible] = useVisibility<HTMLDivElement>({ threshold: 0.05 });
 
     const solutionCategories = useMemo(() => {
         if (loading) return [];
         // Define a specific order for GNB categories
-        const order = ["진단과 분석", "전략 컨설팅", "역량 개발"];
+        // FIX: Explicitly type `order` to match `solution_category_gnb` to resolve type mismatch in `includes`.
+        const order: Solution['solution_category_gnb'][] = ["진단과 분석", "전략 컨설팅", "역량 개발"];
         const categoriesInSolutions = [...new Set(solutions.map(s => s.solution_category_gnb))];
         return order.filter(cat => categoriesInSolutions.includes(cat));
     }, [solutions, loading]);
@@ -59,7 +59,6 @@ const InteractiveSection = () => {
             return qMatch && searchMatch;
         });
 
-        // FIX: Explicitly type the initial value for reduce to avoid 'unknown' type on accumulator.
         return solutionCategories.reduce((acc, category) => {
             const items = filtered.filter(s => s.solution_category_gnb === category);
             if (items.length > 0) {

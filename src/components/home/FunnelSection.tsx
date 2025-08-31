@@ -29,7 +29,6 @@ const ProcessStep = ({ step, title, description, className = '' }: { step: strin
 )
 
 const FunnelSection = () => {
-    // FIX: Add generic type to useVisibility to fix ref type error.
     const [sectionRef, isVisible] = useVisibility<HTMLElement>({threshold: 0.1});
 
     return (

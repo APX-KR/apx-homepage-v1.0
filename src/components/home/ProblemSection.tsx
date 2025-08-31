@@ -143,12 +143,10 @@ const problemsConfig = [
 
 
 const ProblemSection = () => {
-    // FIX: Add generic type to useVisibility to fix ref type error.
     const [sectionRef, isVisible] = useVisibility<HTMLElement>({ threshold: 0.1 });
     const [flippedStates, setFlippedStates] = useState(() => Array(problemsConfig.length).fill(false));
     const { solutions, loading } = useSolutions();
 
-    // FIX: Add type for the 'problems' constant to include the optional 'solutions' property.
     const problems: (typeof problemsConfig[0] & { solutions?: string[] })[] = useMemo(() => {
         if (loading) return problemsConfig;
 

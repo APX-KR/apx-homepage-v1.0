@@ -1,7 +1,6 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { Solution } from '../types.ts';
 
-// FIX: Define a type for the context value.
 interface ModalContextType {
     isContactModalOpen: boolean;
     openContactModal: (message?: string) => void;
@@ -23,7 +22,6 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
     const [initialMessage, setInitialMessage] = useState('');
     const [isComingSoonPopupOpen, setComingSoonPopupOpen] = useState(false);
     const [isSolutionModalOpen, setSolutionModalOpen] = useState(false);
-    // FIX: Type the state for the selected solution.
     const [selectedSolution, setSelectedSolution] = useState<Solution | null>(null);
 
     const openContactModal = (message = '') => {

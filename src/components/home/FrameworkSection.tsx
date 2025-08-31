@@ -76,7 +76,6 @@ const SolutionCard = ({ engTitle, mainTitle, coreValue, examples, icon }: { engT
 
 
 const FrameworkSection = () => {
-    // FIX: Add generic type to useVisibility to fix ref type error.
     const [sectionRef, isVisible] = useVisibility<HTMLElement>({ threshold: 0.1 });
     const [leftSolutions, rightSolutions] = [solutionAreas.slice(0, 2), solutionAreas.slice(2, 4)];
 

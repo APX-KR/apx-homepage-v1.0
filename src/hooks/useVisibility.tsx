@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, RefObject } from 'react';
 
-// FIX: Add generic type and proper type for options and return value.
 export const useVisibility = <T extends Element>(options: IntersectionObserverInit = { threshold: 0.1 }): [RefObject<T>, boolean] => {
     const elementRef = useRef<T>(null);
     const [isVisible, setIsVisible] = useState(false);

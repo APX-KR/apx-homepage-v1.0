@@ -4,7 +4,6 @@ import { useVisibility } from '../../hooks/useVisibility.tsx';
 import { useModal } from '../../contexts/ModalContext.tsx';
 
 const PartnerSection = () => {
-    // FIX: Add generic type to useVisibility to fix ref type error.
     const [sectionRef, isVisible] = useVisibility<HTMLDivElement>({ threshold: 0.1 });
     const { openComingSoonPopup } = useModal();
     

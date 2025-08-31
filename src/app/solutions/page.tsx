@@ -51,7 +51,6 @@ export default function SolutionsPage() {
         return qMatch && searchMatch;
     });
 
-    // FIX: Explicitly type the initial value for reduce to avoid 'unknown' type on accumulator.
     return categoryOrder.reduce((acc, category) => {
         const items = filtered.filter(s => s.solution_category_gnb === category);
         if (items.length > 0) {
