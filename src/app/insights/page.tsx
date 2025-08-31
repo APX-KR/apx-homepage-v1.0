@@ -1,8 +1,10 @@
+'use client';
+
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import Container from '../../components/common/Container.tsx';
 import PageHeader from '../../components/common/PageHeader.tsx';
 import { useInsights } from '../../contexts/InsightContext.tsx';
-import Link from '../../components/common/Link.tsx';
+import Link from 'next/link';
 
 const categoryColors = {
   '리더십': 'text-strategy-blue',

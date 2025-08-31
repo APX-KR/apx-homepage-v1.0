@@ -1,7 +1,9 @@
+'use client';
+
 import React from 'react';
 import { useInsights } from '../../../contexts/InsightContext.tsx';
 import Container from '../../../components/common/Container.tsx';
-import Link from '../../../components/common/Link.tsx';
+import Link from 'next/link';
 
 const categoryColors = {
   '리더십': 'text-strategy-blue',
@@ -11,7 +13,12 @@ const categoryColors = {
   '인재와 역량': 'text-talent-orange',
 };
 
-export default function InsightDetailPage({ slug }: { slug: string }) {
+type InsightDetailPageProps = {
+  params: { slug: string };
+};
+
+export default function InsightDetailPage({ params }: InsightDetailPageProps) {
+  const { slug } = params;
   const { getInsightBySlug, loading } = useInsights();
   const article = getInsightBySlug(slug);
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from '../common/Container.tsx';
 import { useVisibility } from '../../hooks/useVisibility.tsx';
-import Link from '../common/Link.tsx';
+import Link from 'next/link';
 
 const solutionAreas = [
   {
