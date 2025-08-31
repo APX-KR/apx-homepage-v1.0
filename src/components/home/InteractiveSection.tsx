@@ -1,4 +1,3 @@
-'use client';
 
 import React, { useState, useMemo } from 'react';
 import Container from '../common/Container';
@@ -35,9 +34,10 @@ const qFilters: { key: string; label: string }[] = [
 const InteractiveSection: React.FC = () => {
     const { openSolutionModal } = useModal();
     const { solutions, loading, portfolio, togglePortfolioItem, isItemInPortfolio } = useSolutions();
-    const [activeQ, setActiveQ] = useState<string>("All");
     const [showModal, setShowModal] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
+    // FIX: Added missing state for active filter category.
+    const [activeQ, setActiveQ] = useState<string>('All');
     
     const [sectionRef, isVisible] = useVisibility<HTMLDivElement>({ threshold: 0.05 });
 

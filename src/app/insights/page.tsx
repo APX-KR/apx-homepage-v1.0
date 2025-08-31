@@ -1,10 +1,9 @@
-'use client';
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import Container from '../../components/common/Container';
 import PageHeader from '../../components/common/PageHeader';
 import { useInsights } from '../../contexts/InsightContext';
-import { useInternalNavigation } from '../../contexts/InternalNavigationContext';
+import Link from '../../components/common/Link';
 
 const categoryColors: { [key: string]: string } = {
   '리더십': 'text-strategy-blue',
@@ -28,7 +27,6 @@ export default function InsightsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const { insights, loading } = useInsights();
-  const { navigate } = useInternalNavigation();
   const articlesRef = useRef<HTMLDivElement>(null);
 
   const ITEMS_PER_PAGE = 4;
@@ -150,7 +148,7 @@ export default function InsightsPage() {
                 <div className="col-span-1 md:col-span-2 text-center py-20 text-text-secondary">인사이트를 불러오는 중입니다...</div>
             ) : paginatedArticles.length > 0 ? (
                 paginatedArticles.map((article) => (
-                  <div key={article.slug} onClick={() => navigate(`/insights/${article.slug}`)} className="group bg-white rounded-2xl soft-shadow-md hover:soft-shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:-translate-y-1.5 cursor-pointer">
+                  <Link key={article.slug} href={`/insights/${article.slug}`} className="group bg-white rounded-2xl soft-shadow-md hover:soft-shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:-translate-y-1.5">
                     <div className="aspect-video overflow-hidden">
                         <img src={article.imageUrl} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     </div>
@@ -162,7 +160,7 @@ export default function InsightsPage() {
                         <span>{article.author}</span> · <span>{article.date}</span>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))
             ) : (
                 <div className="col-span-1 md:col-span-2 text-center py-20">

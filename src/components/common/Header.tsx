@@ -1,22 +1,20 @@
-'use client';
 
 import React, { useState, useEffect } from 'react';
 import Container from './Container';
 import { useModal } from '../../contexts/ModalContext';
-import { useInternalNavigation } from '../../contexts/InternalNavigationContext';
 import { megaMenuComponents } from './MegaMenuContent';
+import Link from './Link';
 
 const NavLink: React.FC<{ path: string; children: React.ReactNode; onMouseEnter?: () => void; }> = ({ path, children, onMouseEnter }) => {
-  const { navigate } = useInternalNavigation();
   return (
-    <button
-      onClick={() => navigate(path)}
+    <Link
+      href={path}
       onMouseEnter={onMouseEnter}
-      className="text-text-primary hover:text-apx-growth-green font-semibold text-body-lg tracking-tight-title relative group transition-colors duration-300 py-2 leading-tighter bg-transparent border-none cursor-pointer"
+      className="text-text-primary hover:text-apx-growth-green font-semibold text-body-lg tracking-tight-title relative group transition-colors duration-300 py-2 leading-tighter"
     >
       {children}
       <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-apx-growth-green group-hover:w-full transition-all duration-300 ease-in-out"></span>
-    </button>
+    </Link>
   );
 }
 
@@ -26,7 +24,6 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ onMegaMenuToggle }) => {
   const { openContactModal } = useModal();
-  const { navigate } = useInternalNavigation();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -57,9 +54,9 @@ const Header: React.FC<HeaderProps> = ({ onMegaMenuToggle }) => {
     <div onMouseLeave={() => setActiveMenu(null)} className="sticky top-0 z-50">
       <header className={`transition-shadow duration-300 ${isScrolled && !activeMenu ? 'soft-shadow' : ''} bg-white/80 backdrop-blur-lg`}>
         <Container className="flex items-end justify-between h-[100px] md:h-[120px] pb-6">
-          <span onClick={() => navigate('/')} className="cursor-pointer flex items-center">
+          <Link href="/" className="flex items-center">
             <img src="https://storage.googleapis.com/apxhomepage-asset/APX_Logo(G).png" alt="APX Consulting Logo" className="h-10 w-auto" />
-          </span>
+          </Link>
           <nav className="hidden lg:flex items-center gap-10">
             {navItems.map((item) => (
               <NavLink 
@@ -95,7 +92,7 @@ const Header: React.FC<HeaderProps> = ({ onMegaMenuToggle }) => {
         <div className={`lg:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
             <div className="bg-white border-t border-border-light">
               {navItems.map((item) => (
-                  <span key={item.name} onClick={() => { navigate(item.path); setMobileMenuOpen(false); }} className="cursor-pointer block px-6 py-3 text-body-base font-medium text-text-secondary hover:text-apx-growth-green hover:bg-gray-50">{item.name}</span>
+                  <Link key={item.name} href={item.path} onClick={() => setMobileMenuOpen(false)} className="block px-6 py-3 text-body-base font-medium text-text-secondary hover:text-apx-growth-green hover:bg-gray-50">{item.name}</Link>
               ))}
               <div className="p-4">
                  <button

@@ -1,7 +1,6 @@
-'use client';
 
 import React from 'react';
-import { useRouter } from '../../contexts/RouterContext';
+import { useInternalNavigation } from '../../contexts/InternalNavigationContext';
 
 interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     href: string;
@@ -9,7 +8,7 @@ interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 }
 
 const Link: React.FC<LinkProps> = ({ href, children, ...props }) => {
-    const { navigate } = useRouter();
+    const { navigate } = useInternalNavigation();
 
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         // Allow ctrl/cmd+click to open in new tab or right click

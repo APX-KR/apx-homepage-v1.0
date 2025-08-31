@@ -1,9 +1,8 @@
-'use client';
 
 import React from 'react';
 import { useInsights } from '../../../contexts/InsightContext';
 import Container from '../../../components/common/Container';
-import { useInternalNavigation } from '../../../contexts/InternalNavigationContext';
+import Link from '../../../components/common/Link';
 
 const categoryColors: { [key: string]: string } = {
   '리더십': 'text-strategy-blue',
@@ -15,7 +14,6 @@ const categoryColors: { [key: string]: string } = {
 
 export default function InsightDetailPage({ slug }: { slug: string }) {
   const { getInsightBySlug, loading } = useInsights();
-  const { navigate } = useInternalNavigation();
   const article = getInsightBySlug(slug);
 
   if (loading) {
@@ -32,12 +30,12 @@ export default function InsightDetailPage({ slug }: { slug: string }) {
             <Container>
                 <h1 className="text-h3 text-text-primary mb-4">아티클을 찾을 수 없습니다.</h1>
                 <p className="text-body-lg text-text-secondary mb-8">요청하신 페이지를 찾을 수 없거나, 삭제되었을 수 있습니다.</p>
-                <button 
-                    onClick={() => navigate('/insights')}
+                <Link 
+                    href='/insights'
                     className="px-8 py-3 bg-apx-growth-green text-white font-semibold text-body-base leading-none rounded-full border-2 border-transparent hover:bg-apx-deep-growth transition-all duration-300"
                 >
                     인사이트 목록으로 돌아가기
-                </button>
+                </Link>
             </Container>
         </div>
     );
@@ -47,15 +45,15 @@ export default function InsightDetailPage({ slug }: { slug: string }) {
     <div className="bg-bg-primary py-16 md:py-24">
       <Container>
         <div className="max-w-4xl mx-auto">
-          <button 
-            onClick={() => navigate('/insights')} 
+          <Link 
+            href='/insights' 
             className="inline-flex items-center gap-2 text-apx-growth-green font-semibold mb-8 hover:text-apx-deep-growth transition-colors"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
             </svg>
             목록으로 돌아가기
-          </button>
+          </Link>
 
           <header className="mb-10 border-b border-border-light pb-10">
             <p className={`font-bold ${categoryColors[article.category] || 'text-text-secondary'} mb-2`}>{article.category}</p>

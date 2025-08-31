@@ -1,9 +1,8 @@
-'use client';
 
 import React from 'react';
 import Container from '../common/Container';
 import { useVisibility } from '../../hooks/useVisibility';
-import { useInternalNavigation } from '../../contexts/InternalNavigationContext';
+import Link from '../common/Link';
 
 const solutionAreas = [
   {
@@ -50,7 +49,6 @@ interface SolutionCardProps {
 }
 
 const SolutionCard: React.FC<SolutionCardProps> = ({ engTitle, mainTitle, coreValue, examples, icon }) => {
-    const { navigate } = useInternalNavigation();
     return (
         <div className="bg-white p-8 rounded-2xl flex flex-col h-full soft-shadow-md hover:soft-shadow-lg hover:-translate-y-1.5 transition-all duration-300 text-left">
           {/* Top Section */}
@@ -77,9 +75,9 @@ const SolutionCard: React.FC<SolutionCardProps> = ({ engTitle, mainTitle, coreVa
               ))}
             </ul>
             <div className="text-right">
-                <button onClick={() => navigate('/solutions')} className="font-bold text-text-secondary hover:text-apx-growth-green text-body-sm transition-colors duration-300 bg-transparent border-none cursor-pointer">
+                <Link href='/solutions' className="font-bold text-text-secondary hover:text-apx-growth-green text-body-sm transition-colors duration-300">
                     솔루션 더보기 ↗
-                </button>
+                </Link>
             </div>
           </div>
         </div>

@@ -1,4 +1,3 @@
-'use client';
 
 import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
 import { Insight } from '../types';

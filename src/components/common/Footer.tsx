@@ -1,29 +1,26 @@
-'use client';
 
 import React from 'react';
 import Container from './Container';
-import { useInternalNavigation } from '../../contexts/InternalNavigationContext';
+import Link from './Link';
 
 const FooterLink: React.FC<{ path: string, children: React.ReactNode }> = ({ path, children }) => {
-    const { navigate } = useInternalNavigation();
     return (
-        <span onClick={() => navigate(path)} className="cursor-pointer text-white hover:opacity-80 transition-opacity duration-300 text-body-sm">
+        <Link href={path} className="text-white hover:opacity-80 transition-opacity duration-300 text-body-sm">
             {children}
-        </span>
+        </Link>
     );
 };
 
 const Footer: React.FC = () => {
-    const { navigate } = useInternalNavigation();
     return (
         <footer className="bg-apx-deep-growth text-white">
             <Container className="py-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
                     {/* Column 1: Company Info */}
                     <div className="lg:col-span-4 text-body-sm text-white">
-                        <span onClick={() => navigate('/')} className="cursor-pointer mb-6 inline-block">
+                        <Link href="/" className="mb-6 inline-block">
                             <img src="https://storage.googleapis.com/apxhomepage-asset/APX_Logo(W).png" alt="APX Consulting Logo" className="h-10 w-auto" />
-                        </span>
+                        </Link>
                         <div className="space-y-2">
                             <p className="font-semibold text-white">(주)에이피엑스컨설팅</p>
                             <p><span className="font-semibold text-white mr-2">대표이사</span>김혜숙</p>
@@ -57,21 +54,21 @@ const Footer: React.FC = () => {
                     <div className="lg:col-span-2">
                         <h3 className="font-semibold text-white mb-4 text-body-base">BPO 서비스</h3>
                         <ul className="space-y-3">
-                            <li><FooterLink path="/services">CFO 구독 서비스</FooterLink></li>
-                            <li><FooterLink path="/services">COO 구독 서비스</FooterLink></li>
-                            <li><FooterLink path="/services">경영지원 패키지</FooterLink></li>
+                            <li><FooterLink path="/services#cfo-service">CFO 구독 서비스</FooterLink></li>
+                            <li><FooterLink path="/services#coo-service">COO 구독 서비스</FooterLink></li>
+                            <li><FooterLink path="/services#package-service">경영지원 패키지</FooterLink></li>
                         </ul>
                     </div>
 
                      {/* Column 5: Insights & About */}
                      <div className="lg:col-span-2">
                         <div className="space-y-3">
-                            <span onClick={() => navigate('/insights')} className="cursor-pointer block font-semibold text-white text-body-base hover:opacity-80 transition-opacity duration-300">
+                            <Link href='/insights' className="block font-semibold text-white text-body-base hover:opacity-80 transition-opacity duration-300">
                                 인사이트
-                            </span>
-                            <span onClick={() => navigate('/about')} className="cursor-pointer block font-semibold text-white text-body-base hover:opacity-80 transition-opacity duration-300">
+                            </Link>
+                            <Link href='/about' className="block font-semibold text-white text-body-base hover:opacity-80 transition-opacity duration-300">
                                 회사소개
-                            </span>
+                            </Link>
                         </div>
                     </div>
                 </div>
