@@ -1,11 +1,6 @@
-
 import React, { createContext, useContext } from 'react';
 
-interface InternalNavigationContextType {
-    navigate: (path: string) => void;
-}
-
-export const InternalNavigationContext = createContext<InternalNavigationContextType | undefined>(undefined);
+export const InternalNavigationContext = createContext(undefined);
 
 export const useInternalNavigation = () => {
     const context = useContext(InternalNavigationContext);

@@ -1,10 +1,9 @@
-
 import React from 'react';
-import { useInsights } from '../../../contexts/InsightContext';
-import Container from '../../../components/common/Container';
-import Link from '../../../components/common/Link';
+import { useInsights } from '../../../contexts/InsightContext.js';
+import Container from '../../../components/common/Container.js';
+import Link from '../../../components/common/Link.js';
 
-const categoryColors: { [key: string]: string } = {
+const categoryColors = {
   '리더십': 'text-strategy-blue',
   '조직구조': 'text-process-gray',
   '조직문화': 'text-culture-coral',
@@ -12,7 +11,7 @@ const categoryColors: { [key: string]: string } = {
   '인재와 역량': 'text-talent-orange',
 };
 
-export default function InsightDetailPage({ slug }: { slug: string }) {
+export default function InsightDetailPage({ slug }) {
   const { getInsightBySlug, loading } = useInsights();
   const article = getInsightBySlug(slug);
 

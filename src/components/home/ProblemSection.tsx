@@ -1,8 +1,7 @@
-
 import React, { useState, useMemo } from 'react';
-import Container from '../common/Container';
-import { useVisibility } from '../../hooks/useVisibility';
-import { useSolutions } from '../../contexts/SolutionContext';
+import Container from '../common/Container.js';
+import { useVisibility } from '../../hooks/useVisibility.js';
+import { useSolutions } from '../../contexts/SolutionContext.js';
 
 const problemsConfig = [
     {
@@ -143,8 +142,8 @@ const problemsConfig = [
 ];
 
 
-const ProblemSection: React.FC = () => {
-    const [sectionRef, isVisible] = useVisibility<HTMLDivElement>({ threshold: 0.1 });
+const ProblemSection = () => {
+    const [sectionRef, isVisible] = useVisibility({ threshold: 0.1 });
     const [flippedStates, setFlippedStates] = useState(() => Array(problemsConfig.length).fill(false));
     const { solutions, loading } = useSolutions();
 
@@ -163,7 +162,7 @@ const ProblemSection: React.FC = () => {
         });
     }, [solutions, loading]);
 
-    const handleFlip = (index: number) => {
+    const handleFlip = (index) => {
         setFlippedStates(prevStates => {
             const newStates = [...prevStates];
             newStates[index] = !newStates[index];
@@ -263,7 +262,7 @@ const ProblemSection: React.FC = () => {
                                         {problem.back.solutionTitle}
                                       </h4>
                                       <ul className="space-y-1.5 text-body-sm pl-1">
-                                         {(problem as any).solutions?.map((solution: string, i: number) => (
+                                         {problem.solutions?.map((solution, i) => (
                                              <li key={i} className="flex items-start">
                                                  <span className="text-white/80 mr-2 mt-1">✓</span>
                                                  <span className="text-white/90 leading-relaxed">{solution}</span>

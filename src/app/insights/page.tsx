@@ -1,11 +1,10 @@
-
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import Container from '../../components/common/Container';
-import PageHeader from '../../components/common/PageHeader';
-import { useInsights } from '../../contexts/InsightContext';
-import Link from '../../components/common/Link';
+import Container from '../../components/common/Container.js';
+import PageHeader from '../../components/common/PageHeader.js';
+import { useInsights } from '../../contexts/InsightContext.js';
+import Link from '../../components/common/Link.js';
 
-const categoryColors: { [key: string]: string } = {
+const categoryColors = {
   '리더십': 'text-strategy-blue',
   '조직구조': 'text-process-gray',
   '조직문화': 'text-culture-coral',
@@ -27,7 +26,7 @@ export default function InsightsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const { insights, loading } = useInsights();
-  const articlesRef = useRef<HTMLDivElement>(null);
+  const articlesRef = useRef(null);
 
   const ITEMS_PER_PAGE = 4;
 
@@ -52,7 +51,7 @@ export default function InsightsPage() {
     return filteredArticles.slice(startIndex, startIndex + ITEMS_PER_PAGE);
   }, [currentPage, filteredArticles]);
 
-  const handlePageChange = (page: number) => {
+  const handlePageChange = (page) => {
     if (page < 1 || page > totalPages) return;
     setCurrentPage(page);
     articlesRef.current?.scrollIntoView({ behavior: 'smooth' });

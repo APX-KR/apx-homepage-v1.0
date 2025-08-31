@@ -1,14 +1,12 @@
-
 import React, { useState, useMemo } from 'react';
-import Container from '../../components/common/Container';
-import PageHeader from '../../components/common/PageHeader';
-import { useModal } from '../../contexts/ModalContext';
-import { useSolutions } from '../../contexts/SolutionContext';
-import { Solution } from '../../types';
-import FloatingPortfolioButton from '../../components/common/FloatingPortfolioButton';
-import PortfolioModal from '../../components/common/PortfolioModal';
+import Container from '../../components/common/Container.js';
+import PageHeader from '../../components/common/PageHeader.js';
+import { useModal } from '../../contexts/ModalContext.js';
+import { useSolutions } from '../../contexts/SolutionContext.js';
+import FloatingPortfolioButton from '../../components/common/FloatingPortfolioButton.js';
+import PortfolioModal from '../../components/common/PortfolioModal.js';
 
-const qCategoryDetails: { [key: string]: { label: string; bg: string; text: string; } } = {
+const qCategoryDetails = {
     '리더십': { label: '리더십', bg: 'bg-strategy-blue/10', text: 'text-strategy-blue' },
     '조직구조': { label: '조직구조', bg: 'bg-process-gray/10', text: 'text-process-gray' },
     '인재와 역량': { label: '인재와 역량', bg: 'bg-performance-green/10', text: 'text-performance-green' },
@@ -16,7 +14,7 @@ const qCategoryDetails: { [key: string]: { label: string; bg: string; text: stri
     '성과관리': { label: '성과관리', bg: 'bg-talent-orange/10', text: 'text-talent-orange' },
 };
 
-const qFilters: { key: string; label: string }[] = [
+const qFilters = [
     { key: 'All', label: '전체보기' },
     { key: '리더십', label: '리더십' },
     { key: '조직구조', label: '조직구조' },
@@ -30,12 +28,12 @@ export default function SolutionsPage() {
   const { openSolutionModal } = useModal();
   const { solutions, loading, portfolio, togglePortfolioItem, isItemInPortfolio } = useSolutions();
   const [showModal, setShowModal] = useState(false);
-  const [activeQ, setActiveQ] = useState<string>("All");
+  const [activeQ, setActiveQ] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const categoryOrder: ('진단과 분석' | '전략 컨설팅' | '역량 개발')[] = ["진단과 분석", "전략 컨설팅", "역량 개발"];
+  const categoryOrder = ["진단과 분석", "전략 컨설팅", "역량 개발"];
 
-  const categoryIds: { [key: string]: string } = {
+  const categoryIds = {
     "진단과 분석": "diagnose",
     "전략 컨설팅": "strategy",
     "역량 개발": "development",
@@ -58,7 +56,7 @@ export default function SolutionsPage() {
             acc[category] = items;
         }
         return acc;
-    }, {} as Record<string, Solution[]>);
+    }, {});
 
   }, [activeQ, searchQuery, solutions, loading, categoryOrder]);
 
@@ -113,7 +111,7 @@ export default function SolutionsPage() {
                      <div className="text-center py-20 text-text-secondary">솔루션을 불러오는 중입니다...</div>
                 ) : Object.keys(groupedSolutions).length > 0 ? (
                     Object.entries(groupedSolutions).map(([category, solutionsInCategory]) => (
-                        <section key={category} id={categoryIds[category as keyof typeof categoryIds]} className="scroll-mt-[120px] md:scroll-mt-[140px]">
+                        <section key={category} id={categoryIds[category]} className="scroll-mt-[120px] md:scroll-mt-[140px]">
                             <h3 className="text-h4 font-bold text-text-primary mb-8 border-b-2 border-apx-growth-green pb-4">{category}</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                 {solutionsInCategory.map(solution => {

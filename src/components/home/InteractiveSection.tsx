@@ -1,20 +1,18 @@
-
 import React, { useState, useMemo } from 'react';
-import Container from '../common/Container';
-import { useModal } from '../../contexts/ModalContext';
-import { useVisibility } from '../../hooks/useVisibility';
-import FloatingPortfolioButton from '../common/FloatingPortfolioButton';
-import { useSolutions } from '../../contexts/SolutionContext';
-import { Solution } from '../../types';
-import PortfolioModal from '../common/PortfolioModal';
+import Container from '../common/Container.js';
+import { useModal } from '../../contexts/ModalContext.js';
+import { useVisibility } from '../../hooks/useVisibility.js';
+import FloatingPortfolioButton from '../common/FloatingPortfolioButton.js';
+import { useSolutions } from '../../contexts/SolutionContext.js';
+import PortfolioModal from '../common/PortfolioModal.js';
 
-const categoryStyles: { [key: string]: { bg: string; text: string; border: string; } } = {
+const categoryStyles = {
     "진단과 분석": { bg: 'bg-diagnosis-blue/10', text: 'text-diagnosis-blue', border: 'border-diagnosis-blue' },
     "전략 컨설팅": { bg: 'bg-strategy-blue/10', text: 'text-strategy-blue', border: 'border-strategy-blue' },
     "역량 개발": { bg: 'bg-talent-orange/10', text: 'text-talent-orange', border: 'border-talent-orange' },
 };
 
-const qCategoryDetails: { [key: string]: { label: string; bg: string; text: string; } } = {
+const qCategoryDetails = {
     '리더십': { label: '리더십', bg: 'bg-strategy-blue/10', text: 'text-strategy-blue' },
     '조직구조': { label: '조직구조', bg: 'bg-process-gray/10', text: 'text-process-gray' },
     '인재와 역량': { label: '인재와 역량', bg: 'bg-performance-green/10', text: 'text-performance-green' },
@@ -22,7 +20,7 @@ const qCategoryDetails: { [key: string]: { label: string; bg: string; text: stri
     '성과관리': { label: '성과관리', bg: 'bg-talent-orange/10', text: 'text-talent-orange' },
 };
 
-const qFilters: { key: string; label: string }[] = [
+const qFilters = [
     { key: 'All', label: '전체보기' },
     { key: '리더십', label: '리더십' },
     { key: '조직구조', label: '조직구조' },
@@ -31,19 +29,19 @@ const qFilters: { key: string; label: string }[] = [
     { key: '성과관리', label: '성과관리' },
 ];
 
-const InteractiveSection: React.FC = () => {
+const InteractiveSection = () => {
     const { openSolutionModal } = useModal();
     const { solutions, loading, portfolio, togglePortfolioItem, isItemInPortfolio } = useSolutions();
     const [showModal, setShowModal] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
-    const [activeQ, setActiveQ] = useState<string>('All');
+    const [activeQ, setActiveQ] = useState('All');
     
-    const [sectionRef, isVisible] = useVisibility<HTMLDivElement>({ threshold: 0.05 });
+    const [sectionRef, isVisible] = useVisibility({ threshold: 0.05 });
 
     const solutionCategories = useMemo(() => {
         if (loading) return [];
         // Define a specific order for GNB categories
-        const order: Solution['solution_category_gnb'][] = ["진단과 분석", "전략 컨설팅", "역량 개발"];
+        const order = ["진단과 분석", "전략 컨설팅", "역량 개발"];
         const categoriesInSolutions = [...new Set(solutions.map(s => s.solution_category_gnb))];
         return order.filter(cat => categoriesInSolutions.includes(cat));
     }, [solutions, loading]);
@@ -65,7 +63,7 @@ const InteractiveSection: React.FC = () => {
                 acc[category] = items;
             }
             return acc;
-        }, {} as Record<string, Solution[]>);
+        }, {});
 
     }, [activeQ, searchQuery, solutions, loading, solutionCategories]);
 

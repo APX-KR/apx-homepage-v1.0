@@ -1,11 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
-import Container from './Container';
-import { useModal } from '../../contexts/ModalContext';
-import { megaMenuComponents } from './MegaMenuContent';
-import Link from './Link';
+import Container from './Container.js';
+import { useModal } from '../../contexts/ModalContext.js';
+import { megaMenuComponents } from './MegaMenuContent.js';
+import Link from './Link.js';
 
-const NavLink: React.FC<{ path: string; children: React.ReactNode; onMouseEnter?: () => void; }> = ({ path, children, onMouseEnter }) => {
+const NavLink = ({ path, children, onMouseEnter }) => {
   return (
     <Link
       href={path}
@@ -18,15 +17,11 @@ const NavLink: React.FC<{ path: string; children: React.ReactNode; onMouseEnter?
   );
 }
 
-interface HeaderProps {
-  onMegaMenuToggle: (isOpen: boolean) => void;
-}
-
-const Header: React.FC<HeaderProps> = ({ onMegaMenuToggle }) => {
+const Header = ({ onMegaMenuToggle }) => {
   const { openContactModal } = useModal();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [activeMenu, setActiveMenu] = useState(null);
 
   const MegaMenuComponent = activeMenu ? megaMenuComponents[activeMenu] : null;
 

@@ -1,16 +1,10 @@
-
 import React from 'react';
-import { useInternalNavigation } from '../../contexts/InternalNavigationContext';
+import { useInternalNavigation } from '../../contexts/InternalNavigationContext.js';
 
-interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-    href: string;
-    children: React.ReactNode;
-}
-
-const Link: React.FC<LinkProps> = ({ href, children, ...props }) => {
+const Link = ({ href, children, ...props }) => {
     const { navigate } = useInternalNavigation();
 
-    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const handleClick = (e) => {
         // Allow ctrl/cmd+click to open in new tab or right click
         if (e.metaKey || e.ctrlKey || e.button !== 0) {
             return;

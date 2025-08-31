@@ -1,14 +1,15 @@
 import React from 'react';
-import Container from './Container';
+import Container from './Container.js';
 
+// Fix: Define component props and make backgroundImage optional
 interface PageHeaderProps {
-    title: string | React.ReactNode;
-    description: string | React.ReactNode;
+    title: React.ReactNode;
+    description: React.ReactNode;
     engTitle: string;
     backgroundImage?: string;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ title, description, engTitle, backgroundImage }) => {
+const PageHeader = ({ title, description, engTitle, backgroundImage }: PageHeaderProps) => {
     const bgStyle = backgroundImage 
         ? { backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${backgroundImage}')` }
         : {};

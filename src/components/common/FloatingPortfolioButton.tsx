@@ -1,12 +1,6 @@
-
 import React from 'react';
 
-interface FloatingPortfolioButtonProps {
-    count: number;
-    onClick: () => void;
-}
-
-const FloatingPortfolioButton: React.FC<FloatingPortfolioButtonProps> = ({ count, onClick }) => {
+const FloatingPortfolioButton = ({ count, onClick }) => {
     // This calculation places the button 40px to the right of the main content container on wide screens,
     // while maintaining a safe 24px margin on smaller screens.
     const responsivePositionStyle = {

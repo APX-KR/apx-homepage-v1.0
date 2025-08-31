@@ -1,14 +1,13 @@
-
 import React from 'react';
-import Container from '../common/Container';
-import { useVisibility } from '../../hooks/useVisibility';
-import { useModal } from '../../contexts/ModalContext';
+import Container from '../common/Container.js';
+import { useVisibility } from '../../hooks/useVisibility.js';
+import { useModal } from '../../contexts/ModalContext.js';
 
-const PartnerSection: React.FC = () => {
-    const [sectionRef, isVisible] = useVisibility<HTMLDivElement>({ threshold: 0.1 });
+const PartnerSection = () => {
+    const [sectionRef, isVisible] = useVisibility({ threshold: 0.1 });
     const { openComingSoonPopup } = useModal();
     
-    const handleComingSoonClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const handleComingSoonClick = (e) => {
         e.preventDefault();
         openComingSoonPopup();
     };

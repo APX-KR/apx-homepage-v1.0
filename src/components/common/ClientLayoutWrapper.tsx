@@ -1,12 +1,11 @@
-
 import React, { useState } from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import { useModal } from '../../contexts/ModalContext';
-import ContactModal from './ContactModal';
-import SolutionDetailModal from './SolutionDetailModal';
+import Header from './Header.js';
+import Footer from './Footer.js';
+import { useModal } from '../../contexts/ModalContext.js';
+import ContactModal from './ContactModal.js';
+import SolutionDetailModal from './SolutionDetailModal.js';
 
-const ComingSoonPopup: React.FC = () => {
+const ComingSoonPopup = () => {
     const { isComingSoonPopupOpen, closeComingSoonPopup } = useModal();
 
     if (!isComingSoonPopupOpen) {
@@ -42,7 +41,7 @@ const ComingSoonPopup: React.FC = () => {
     );
 };
 
-const AppContent: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const AppContent = ({ children }) => {
     const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
     
     return (
@@ -59,7 +58,7 @@ const AppContent: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     );
 }
 
-export default function ClientLayoutWrapper({ children }: { children: React.ReactNode }) {
+export default function ClientLayoutWrapper({ children }) {
     return (
         <AppContent>{children}</AppContent>
     );

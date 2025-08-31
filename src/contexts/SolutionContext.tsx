@@ -1,8 +1,9 @@
-
-import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
-import { Solution } from '../types';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 import solutionsData from '../data/solutions.json';
+// Fix: Import Solution type
+import { Solution } from '../types';
 
+// Fix: Define context type
 interface SolutionContextType {
     solutions: Solution[];
     loading: boolean;
@@ -12,13 +13,16 @@ interface SolutionContextType {
     isItemInPortfolio: (solution: Solution) => boolean;
 }
 
+// Fix: Provide type to createContext
 const SolutionContext = createContext<SolutionContextType | undefined>(undefined);
 
-const activeSolutions = solutionsData.filter(s => s.status === '활성 (Active)');
+// Fix: Type the solutions data
+const activeSolutions: Solution[] = solutionsData.filter(s => s.status === '활성 (Active)');
 
-export const SolutionProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const SolutionProvider = ({ children }: { children: ReactNode }) => {
     const [solutions] = useState<Solution[]>(activeSolutions);
     const [loading] = useState(false); // Data is now loaded at build time
+    // Fix: Provide type for portfolio state
     const [portfolio, setPortfolio] = useState<Solution[]>([]);
 
     const getSolutionByCode = (code: string) => {

@@ -1,8 +1,7 @@
-
 import React from 'react';
-import { useModal } from '../../contexts/ModalContext';
+import { useModal } from '../../contexts/ModalContext.js';
 
-const DetailSection: React.FC<{ title: string; children: React.ReactNode; }> = ({ title, children }) => {
+const DetailSection = ({ title, children }) => {
     if (!children) return null;
     return (
         <div>
@@ -14,7 +13,7 @@ const DetailSection: React.FC<{ title: string; children: React.ReactNode; }> = (
     );
 };
 
-const SolutionDetailModal: React.FC = () => {
+const SolutionDetailModal = () => {
     const { isSolutionModalOpen, closeSolutionModal, selectedSolution, openContactModal } = useModal();
 
     if (!isSolutionModalOpen || !selectedSolution) {

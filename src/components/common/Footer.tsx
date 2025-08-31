@@ -1,9 +1,8 @@
-
 import React from 'react';
-import Container from './Container';
-import Link from './Link';
+import Container from './Container.js';
+import Link from './Link.js';
 
-const FooterLink: React.FC<{ path: string, children: React.ReactNode }> = ({ path, children }) => {
+const FooterLink = ({ path, children }) => {
     return (
         <Link href={path} className="text-white hover:opacity-80 transition-opacity duration-300 text-body-sm">
             {children}
@@ -11,7 +10,7 @@ const FooterLink: React.FC<{ path: string, children: React.ReactNode }> = ({ pat
     );
 };
 
-const Footer: React.FC = () => {
+const Footer = () => {
     return (
         <footer className="bg-apx-deep-growth text-white">
             <Container className="py-16">

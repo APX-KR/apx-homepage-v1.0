@@ -1,12 +1,6 @@
-
 import React from 'react';
 
-interface PrivacyPolicyModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-}
-
-const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({ isOpen, onClose }) => {
+const PrivacyPolicyModal = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     return (

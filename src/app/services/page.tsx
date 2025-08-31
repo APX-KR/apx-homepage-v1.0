@@ -1,10 +1,9 @@
-
 import React from 'react';
-import Container from '../../components/common/Container';
-import PageHeader from '../../components/common/PageHeader';
-import { useModal } from '../../contexts/ModalContext';
+import Container from '../../components/common/Container.js';
+import PageHeader from '../../components/common/PageHeader.js';
+import { useModal } from '../../contexts/ModalContext.js';
 
-const ServiceCard: React.FC<{ title: string; description: string; icon: React.ReactNode; }> = ({ title, description, icon }) => (
+const ServiceCard = ({ title, description, icon }) => (
     <div className="bg-white rounded-2xl p-8 h-full soft-shadow-md hover:soft-shadow-lg transition-shadow duration-300">
         <div className="w-16 h-16 rounded-full bg-apx-growth-green text-white flex items-center justify-center mx-auto mb-6">
             {icon}
@@ -14,7 +13,7 @@ const ServiceCard: React.FC<{ title: string; description: string; icon: React.Re
     </div>
 );
 
-const GrowthOSPageContent: React.FC = () => {
+const GrowthOSPageContent = () => {
     const { openContactModal } = useModal();
 
     return (

@@ -1,8 +1,7 @@
-
 import React from 'react';
-import Link from './Link';
+import Link from './Link.js';
 
-const PerspectiveMegaMenu: React.FC = () => {
+const PerspectiveMegaMenu = () => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
             <Link href='/perspective#philosophy' className="group block">
@@ -22,7 +21,7 @@ const PerspectiveMegaMenu: React.FC = () => {
 };
 
 
-const ProjectSolutionsMegaMenu: React.FC = () => {
+const ProjectSolutionsMegaMenu = () => {
     return (
         <div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
@@ -62,7 +61,7 @@ const ProjectSolutionsMegaMenu: React.FC = () => {
     );
 };
 
-const BpoServicesMegaMenu: React.FC = () => {
+const BpoServicesMegaMenu = () => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
             <Link href='/services#cfo-service' className="group block">
@@ -81,7 +80,7 @@ const BpoServicesMegaMenu: React.FC = () => {
     );
 };
 
-export const megaMenuComponents: { [key: string]: React.FC<{}> } = {
+export const megaMenuComponents = {
     perspective: PerspectiveMegaMenu,
     projectSolutions: ProjectSolutionsMegaMenu,
     bpoServices: BpoServicesMegaMenu,

@@ -1,11 +1,10 @@
-
 import React from 'react';
-import HeroSection from '../components/home/HeroSection';
-import ProblemSection from '../components/home/ProblemSection';
-import FunnelSection from '../components/home/FunnelSection';
-import FrameworkSection from '../components/home/FrameworkSection';
-import InteractiveSection from '../components/home/InteractiveSection';
-import PartnerSection from '../components/home/PartnerSection';
+import HeroSection from '../components/home/HeroSection.js';
+import ProblemSection from '../components/home/ProblemSection.js';
+import FunnelSection from '../components/home/FunnelSection.js';
+import FrameworkSection from '../components/home/FrameworkSection.js';
+import InteractiveSection from '../components/home/InteractiveSection.js';
+import PartnerSection from '../components/home/PartnerSection.js';
 
 export default function Home() {
   return (

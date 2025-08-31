@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
-import Container from '../common/Container';
-import { useModal } from '../../contexts/ModalContext';
+import Container from '../common/Container.js';
+import { useModal } from '../../contexts/ModalContext.js';
 
-const HeroSection: React.FC = () => {
+const HeroSection = () => {
     const { openContactModal } = useModal();
     const [isVisible, setIsVisible] = useState(false);
 

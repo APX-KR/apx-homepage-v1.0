@@ -1,7 +1,6 @@
-
 import React from 'react';
-import Container from '../common/Container';
-import { useVisibility } from '../../hooks/useVisibility';
+import Container from '../common/Container.js';
+import { useVisibility } from '../../hooks/useVisibility.js';
 
 const processSteps = [
     {
@@ -21,7 +20,8 @@ const processSteps = [
     }
 ];
 
-const ProcessStep: React.FC<{ step: string; title: string; description: string; className?: string; }> = ({ step, title, description, className }) => (
+// Fix: Add a default value to className to make it an optional prop.
+const ProcessStep = ({ step, title, description, className = '' }) => (
     <div className={`bg-white p-6 rounded-2xl soft-shadow ${className}`}>
         <span className="text-sm font-bold text-apx-growth-green">{step}</span>
         <h3 className="text-h5 font-bold text-text-primary mt-1 mb-2">{title}</h3>
@@ -29,8 +29,8 @@ const ProcessStep: React.FC<{ step: string; title: string; description: string; 
     </div>
 )
 
-const FunnelSection: React.FC = () => {
-    const [sectionRef, isVisible] = useVisibility<HTMLDivElement>({threshold: 0.1});
+const FunnelSection = () => {
+    const [sectionRef, isVisible] = useVisibility({threshold: 0.1});
 
     return (
         <section ref={sectionRef} className="py-24 md:py-32 overflow-hidden">

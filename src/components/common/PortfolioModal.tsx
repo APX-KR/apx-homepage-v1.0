@@ -1,21 +1,14 @@
-
 import React from 'react';
-import { Solution } from '../../types';
-import { useSolutions } from '../../contexts/SolutionContext';
-import { useModal } from '../../contexts/ModalContext';
+import { useSolutions } from '../../contexts/SolutionContext.js';
+import { useModal } from '../../contexts/ModalContext.js';
 
-interface PortfolioModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-}
-
-const categoryStyles: { [key: string]: { bg: string; text: string; border: string; } } = {
+const categoryStyles = {
     "진단과 분석": { bg: 'bg-diagnosis-blue/10', text: 'text-diagnosis-blue', border: 'border-diagnosis-blue' },
     "전략 컨설팅": { bg: 'bg-strategy-blue/10', text: 'text-strategy-blue', border: 'border-strategy-blue' },
     "역량 개발": { bg: 'bg-talent-orange/10', text: 'text-talent-orange', border: 'border-talent-orange' },
 };
 
-const PortfolioModal: React.FC<PortfolioModalProps> = ({ isOpen, onClose }) => {
+const PortfolioModal = ({ isOpen, onClose }) => {
     const { portfolio, togglePortfolioItem } = useSolutions();
     const { openContactModal } = useModal();
 

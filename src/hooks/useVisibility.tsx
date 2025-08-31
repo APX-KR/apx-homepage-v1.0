@@ -1,15 +1,8 @@
-import { useState, useEffect, useRef, RefObject } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-interface IntersectionObserverOptions {
-    threshold?: number | number[];
-    root?: Element | null;
-    rootMargin?: string;
-}
-
-export const useVisibility = <T extends HTMLElement>(
-    options: IntersectionObserverOptions = { threshold: 0.1 }
-): [RefObject<T>, boolean] => {
-    const elementRef = useRef<T>(null);
+export const useVisibility = (options = { threshold: 0.1 }) => {
+    // Fix: Specify the element type for the ref to be compatible with refs on HTML elements.
+    const elementRef = useRef<HTMLElement>(null);
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -35,5 +28,6 @@ export const useVisibility = <T extends HTMLElement>(
         };
     }, [options]);
 
-    return [elementRef, isVisible];
+    // Fix: Add 'as const' to ensure a tuple type is inferred.
+    return [elementRef, isVisible] as const;
 };
