@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import Container from '../common/Container';
 import { useVisibility } from '../../hooks/useVisibility';

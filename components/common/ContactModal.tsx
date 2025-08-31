@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { useModal } from '../../contexts/ModalContext';
 import PrivacyPolicyModal from './PrivacyPolicyModal';

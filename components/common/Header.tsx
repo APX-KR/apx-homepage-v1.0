@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import Container from './Container';
 import { useModal } from '../../contexts/ModalContext';
