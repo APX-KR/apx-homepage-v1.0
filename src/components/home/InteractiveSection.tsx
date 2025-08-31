@@ -36,7 +36,6 @@ const InteractiveSection: React.FC = () => {
     const { solutions, loading, portfolio, togglePortfolioItem, isItemInPortfolio } = useSolutions();
     const [showModal, setShowModal] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
-    // FIX: Added missing state for active filter category.
     const [activeQ, setActiveQ] = useState<string>('All');
     
     const [sectionRef, isVisible] = useVisibility<HTMLDivElement>({ threshold: 0.05 });
