@@ -1,16 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import Home from './src/app/page.tsx';
-import AboutPage from './src/app/about/page.tsx';
-import InsightsPage from './src/app/insights/page.tsx';
-import InsightDetailPage from './src/app/insights/[slug]/page.tsx';
-import PerspectivePage from './src/app/perspective/page.tsx';
-import ServicesPage from './src/app/services/page.tsx';
-import SolutionsPage from './src/app/solutions/page.tsx';
+// Dynamically import page components for code-splitting
+const Home = lazy(() => import('./src/app/page.tsx'));
+const AboutPage = lazy(() => import('./src/app/about/page.tsx'));
+const InsightsPage = lazy(() => import('./src/app/insights/page.tsx'));
+const InsightDetailPage = lazy(() => import('./src/app/insights/[slug]/page.tsx'));
+const PerspectivePage = lazy(() => import('./src/app/perspective/page.tsx'));
+const ServicesPage = lazy(() => import('./src/app/services/page.tsx'));
+const SolutionsPage = lazy(() => import('./src/app/solutions/page.tsx'));
 
 import { InternalNavigationContext } from './src/contexts/InternalNavigationContext.tsx';
 import RootLayout from './src/components/common/ClientLayoutWrapper.tsx';
+
+/**
+ * A simple loading spinner component to be used as a fallback for React Suspense.
+ * This provides visual feedback to the user when a page chunk is being loaded.
+ */
+const LoadingSpinner = () => (
+    <div className="flex justify-center items-center h-96" aria-live="polite" aria-busy="true">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-apx-growth-green"></div>
+        <span className="sr-only">Loading page...</span>
+    </div>
+);
+
 
 /**
  * The App component is now refactored to act solely as a client-side router.
@@ -100,7 +113,9 @@ const App = () => {
 
     return (
         <InternalNavigationContext.Provider value={{ navigate }}>
-            {renderPage()}
+            <Suspense fallback={<LoadingSpinner />}>
+                {renderPage()}
+            </Suspense>
         </InternalNavigationContext.Provider>
     );
 };
