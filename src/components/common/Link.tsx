@@ -1,22 +1,24 @@
 import React from 'react';
-import { useInternalNavigation } from '../../contexts/InternalNavigationContext.js';
+import { useInternalNavigation } from '../../contexts/InternalNavigationContext.tsx';
 
-const Link = ({ href, children, ...props }) => {
+const Link = ({ href, children, ...props }: React.ComponentPropsWithoutRef<'a'>) => {
     const { navigate } = useInternalNavigation();
 
-    const handleClick = (e) => {
+    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         // Allow ctrl/cmd+click to open in new tab or right click
         if (e.metaKey || e.ctrlKey || e.button !== 0) {
             return;
         }
 
         // Prevent navigation for external links or links with targets
-        if(props.target === '_blank' || !href.startsWith('/')) {
+        if(props.target === '_blank' || !href?.startsWith('/')) {
             return;
         }
 
         e.preventDefault();
-        navigate(href);
+        if (href) {
+            navigate(href);
+        }
 
         // If there's an onClick prop from the parent, call it too
         if (props.onClick) {

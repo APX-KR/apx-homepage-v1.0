@@ -1,8 +1,8 @@
 import React from 'react';
-import Container from '../../components/common/Container.js';
-import PageHeader from '../../components/common/PageHeader.js';
+import Container from '../../components/common/Container.tsx';
+import PageHeader from '../../components/common/PageHeader.tsx';
 
-const SectionCard = ({ title, subtitle, children }) => (
+const SectionCard = ({ title, subtitle, children }: { title: string, subtitle: string, children: React.ReactNode }) => (
     <div className="bg-white rounded-2xl soft-shadow-lg p-8 md:p-12">
         <div className="mb-6">
             <p className="text-body-sm font-semibold text-apx-growth-green">{subtitle}</p>

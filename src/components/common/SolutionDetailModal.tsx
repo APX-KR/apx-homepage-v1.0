@@ -1,7 +1,7 @@
 import React from 'react';
-import { useModal } from '../../contexts/ModalContext.js';
+import { useModal } from '../../contexts/ModalContext.tsx';
 
-const DetailSection = ({ title, children }) => {
+const DetailSection = ({ title, children }: { title: string, children: React.ReactNode }) => {
     if (!children) return null;
     return (
         <div>

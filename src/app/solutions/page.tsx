@@ -1,10 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import Container from '../../components/common/Container.js';
-import PageHeader from '../../components/common/PageHeader.js';
-import { useModal } from '../../contexts/ModalContext.js';
-import { useSolutions } from '../../contexts/SolutionContext.js';
-import FloatingPortfolioButton from '../../components/common/FloatingPortfolioButton.js';
-import PortfolioModal from '../../components/common/PortfolioModal.js';
+import Container from '../../components/common/Container.tsx';
+import PageHeader from '../../components/common/PageHeader.tsx';
+import { useModal } from '../../contexts/ModalContext.tsx';
+import { useSolutions } from '../../contexts/SolutionContext.tsx';
+import FloatingPortfolioButton from '../../components/common/FloatingPortfolioButton.tsx';
+import PortfolioModal from '../../components/common/PortfolioModal.tsx';
+import { Solution } from '../../types.ts';
 
 const qCategoryDetails = {
     '리더십': { label: '리더십', bg: 'bg-strategy-blue/10', text: 'text-strategy-blue' },
@@ -33,7 +34,7 @@ export default function SolutionsPage() {
 
   const categoryOrder = ["진단과 분석", "전략 컨설팅", "역량 개발"];
 
-  const categoryIds = {
+  const categoryIds: { [key: string]: string } = {
     "진단과 분석": "diagnose",
     "전략 컨설팅": "strategy",
     "역량 개발": "development",
@@ -50,13 +51,14 @@ export default function SolutionsPage() {
         return qMatch && searchMatch;
     });
 
+    // FIX: Explicitly type the initial value for reduce to avoid 'unknown' type on accumulator.
     return categoryOrder.reduce((acc, category) => {
         const items = filtered.filter(s => s.solution_category_gnb === category);
         if (items.length > 0) {
             acc[category] = items;
         }
         return acc;
-    }, {});
+    }, {} as { [key: string]: Solution[] });
 
   }, [activeQ, searchQuery, solutions, loading, categoryOrder]);
 

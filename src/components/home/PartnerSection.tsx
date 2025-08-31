@@ -1,13 +1,14 @@
 import React from 'react';
-import Container from '../common/Container.js';
-import { useVisibility } from '../../hooks/useVisibility.js';
-import { useModal } from '../../contexts/ModalContext.js';
+import Container from '../common/Container.tsx';
+import { useVisibility } from '../../hooks/useVisibility.tsx';
+import { useModal } from '../../contexts/ModalContext.tsx';
 
 const PartnerSection = () => {
-    const [sectionRef, isVisible] = useVisibility({ threshold: 0.1 });
+    // FIX: Add generic type to useVisibility to fix ref type error.
+    const [sectionRef, isVisible] = useVisibility<HTMLDivElement>({ threshold: 0.1 });
     const { openComingSoonPopup } = useModal();
     
-    const handleComingSoonClick = (e) => {
+    const handleComingSoonClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         openComingSoonPopup();
     };

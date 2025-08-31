@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useModal } from '../../contexts/ModalContext.js';
-import PrivacyPolicyModal from './PrivacyPolicyModal.js';
+import { useModal } from '../../contexts/ModalContext.tsx';
+import PrivacyPolicyModal from './PrivacyPolicyModal.tsx';
 
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwYoMpTGRJbI2mvZKM0CXwGf8AHa_BfN_Q6tewbxJ0VZyqL6cK770LRSHePgHL3tgAUkg/exec';
 
@@ -20,7 +20,7 @@ const ContactModal = () => {
     
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [submitError, setSubmitError] = useState(null);
+    const [submitError, setSubmitError] = useState<string | null>(null);
 
     const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
 
@@ -51,7 +51,7 @@ const ContactModal = () => {
 
     const isFormValid = name && company && department && email && phone && message && agreed;
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!isFormValid) return;
 

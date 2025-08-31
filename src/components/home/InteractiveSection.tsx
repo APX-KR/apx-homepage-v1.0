@@ -1,10 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import Container from '../common/Container.js';
-import { useModal } from '../../contexts/ModalContext.js';
-import { useVisibility } from '../../hooks/useVisibility.js';
-import FloatingPortfolioButton from '../common/FloatingPortfolioButton.js';
-import { useSolutions } from '../../contexts/SolutionContext.js';
-import PortfolioModal from '../common/PortfolioModal.js';
+import Container from '../common/Container.tsx';
+import { useModal } from '../../contexts/ModalContext.tsx';
+import { useVisibility } from '../../hooks/useVisibility.tsx';
+import FloatingPortfolioButton from '../common/FloatingPortfolioButton.tsx';
+import { useSolutions } from '../../contexts/SolutionContext.tsx';
+import PortfolioModal from '../common/PortfolioModal.tsx';
+import { Solution } from '../../types.ts';
 
 const categoryStyles = {
     "진단과 분석": { bg: 'bg-diagnosis-blue/10', text: 'text-diagnosis-blue', border: 'border-diagnosis-blue' },
@@ -36,7 +37,8 @@ const InteractiveSection = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [activeQ, setActiveQ] = useState('All');
     
-    const [sectionRef, isVisible] = useVisibility({ threshold: 0.05 });
+    // FIX: Add generic type to useVisibility to fix ref type error.
+    const [sectionRef, isVisible] = useVisibility<HTMLDivElement>({ threshold: 0.05 });
 
     const solutionCategories = useMemo(() => {
         if (loading) return [];
@@ -57,13 +59,14 @@ const InteractiveSection = () => {
             return qMatch && searchMatch;
         });
 
+        // FIX: Explicitly type the initial value for reduce to avoid 'unknown' type on accumulator.
         return solutionCategories.reduce((acc, category) => {
             const items = filtered.filter(s => s.solution_category_gnb === category);
             if (items.length > 0) {
                 acc[category] = items;
             }
             return acc;
-        }, {});
+        }, {} as { [key: string]: Solution[] });
 
     }, [activeQ, searchQuery, solutions, loading, solutionCategories]);
 

@@ -1,9 +1,9 @@
 import React from 'react';
-import Container from '../../components/common/Container.js';
-import PageHeader from '../../components/common/PageHeader.js';
-import { useModal } from '../../contexts/ModalContext.js';
+import Container from '../../components/common/Container.tsx';
+import PageHeader from '../../components/common/PageHeader.tsx';
+import { useModal } from '../../contexts/ModalContext.tsx';
 
-const ServiceCard = ({ title, description, icon }) => (
+const ServiceCard = ({ title, description, icon }: { title: string, description: string, icon: React.ReactNode }) => (
     <div className="bg-white rounded-2xl p-8 h-full soft-shadow-md hover:soft-shadow-lg transition-shadow duration-300">
         <div className="w-16 h-16 rounded-full bg-apx-growth-green text-white flex items-center justify-center mx-auto mb-6">
             {icon}

@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from './Link.js';
+import Link from './Link.tsx';
 
 const PerspectiveMegaMenu = () => {
     return (

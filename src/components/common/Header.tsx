@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Container from './Container.js';
-import { useModal } from '../../contexts/ModalContext.js';
-import { megaMenuComponents } from './MegaMenuContent.js';
-import Link from './Link.js';
+import Container from './Container.tsx';
+import { useModal } from '../../contexts/ModalContext.tsx';
+import { megaMenuComponents } from './MegaMenuContent.tsx';
+import Link from './Link.tsx';
 
-const NavLink = ({ path, children, onMouseEnter }) => {
+const NavLink = ({ path, children, onMouseEnter }: { path: string, children: React.ReactNode, onMouseEnter: () => void }) => {
   return (
     <Link
       href={path}
@@ -17,13 +17,13 @@ const NavLink = ({ path, children, onMouseEnter }) => {
   );
 }
 
-const Header = ({ onMegaMenuToggle }) => {
+const Header = ({ onMegaMenuToggle }: { onMegaMenuToggle: (isOpen: boolean) => void }) => {
   const { openContactModal } = useModal();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeMenu, setActiveMenu] = useState(null);
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
-  const MegaMenuComponent = activeMenu ? megaMenuComponents[activeMenu] : null;
+  const MegaMenuComponent = activeMenu ? megaMenuComponents[activeMenu as keyof typeof megaMenuComponents] : null;
 
   useEffect(() => {
     const handleScroll = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
-import { useInsights } from '../../../contexts/InsightContext.js';
-import Container from '../../../components/common/Container.js';
-import Link from '../../../components/common/Link.js';
+import { useInsights } from '../../../contexts/InsightContext.tsx';
+import Container from '../../../components/common/Container.tsx';
+import Link from '../../../components/common/Link.tsx';
 
 const categoryColors = {
   '리더십': 'text-strategy-blue',
@@ -11,7 +11,7 @@ const categoryColors = {
   '인재와 역량': 'text-talent-orange',
 };
 
-export default function InsightDetailPage({ slug }) {
+export default function InsightDetailPage({ slug }: { slug: string }) {
   const { getInsightBySlug, loading } = useInsights();
   const article = getInsightBySlug(slug);
 

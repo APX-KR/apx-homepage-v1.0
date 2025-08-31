@@ -1,6 +1,6 @@
 import React from 'react';
-import Container from '../common/Container.js';
-import { useVisibility } from '../../hooks/useVisibility.js';
+import Container from '../common/Container.tsx';
+import { useVisibility } from '../../hooks/useVisibility.tsx';
 
 const processSteps = [
     {
@@ -20,8 +20,7 @@ const processSteps = [
     }
 ];
 
-// Fix: Add a default value to className to make it an optional prop.
-const ProcessStep = ({ step, title, description, className = '' }) => (
+const ProcessStep = ({ step, title, description, className = '' }: { step: string, title: string, description: string, className?: string }) => (
     <div className={`bg-white p-6 rounded-2xl soft-shadow ${className}`}>
         <span className="text-sm font-bold text-apx-growth-green">{step}</span>
         <h3 className="text-h5 font-bold text-text-primary mt-1 mb-2">{title}</h3>
@@ -30,7 +29,8 @@ const ProcessStep = ({ step, title, description, className = '' }) => (
 )
 
 const FunnelSection = () => {
-    const [sectionRef, isVisible] = useVisibility({threshold: 0.1});
+    // FIX: Add generic type to useVisibility to fix ref type error.
+    const [sectionRef, isVisible] = useVisibility<HTMLElement>({threshold: 0.1});
 
     return (
         <section ref={sectionRef} className="py-24 md:py-32 overflow-hidden">

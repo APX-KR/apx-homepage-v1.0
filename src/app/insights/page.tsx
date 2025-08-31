@@ -1,8 +1,8 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import Container from '../../components/common/Container.js';
-import PageHeader from '../../components/common/PageHeader.js';
-import { useInsights } from '../../contexts/InsightContext.js';
-import Link from '../../components/common/Link.js';
+import Container from '../../components/common/Container.tsx';
+import PageHeader from '../../components/common/PageHeader.tsx';
+import { useInsights } from '../../contexts/InsightContext.tsx';
+import Link from '../../components/common/Link.tsx';
 
 const categoryColors = {
   '리더십': 'text-strategy-blue',
@@ -26,7 +26,7 @@ export default function InsightsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const { insights, loading } = useInsights();
-  const articlesRef = useRef(null);
+  const articlesRef = useRef<HTMLDivElement>(null);
 
   const ITEMS_PER_PAGE = 4;
 
@@ -51,7 +51,7 @@ export default function InsightsPage() {
     return filteredArticles.slice(startIndex, startIndex + ITEMS_PER_PAGE);
   }, [currentPage, filteredArticles]);
 
-  const handlePageChange = (page) => {
+  const handlePageChange = (page: number) => {
     if (page < 1 || page > totalPages) return;
     setCurrentPage(page);
     articlesRef.current?.scrollIntoView({ behavior: 'smooth' });

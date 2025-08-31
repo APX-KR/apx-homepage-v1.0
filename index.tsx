@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import Home from './src/app/page.js';
-import AboutPage from './src/app/about/page.js';
-import InsightsPage from './src/app/insights/page.js';
-import InsightDetailPage from './src/app/insights/[slug]/page.js';
-import PerspectivePage from './src/app/perspective/page.js';
-import ServicesPage from './src/app/services/page.js';
-import SolutionsPage from './src/app/solutions/page.js';
+import Home from './src/app/page.tsx';
+import AboutPage from './src/app/about/page.tsx';
+import InsightsPage from './src/app/insights/page.tsx';
+import InsightDetailPage from './src/app/insights/[slug]/page.tsx';
+import PerspectivePage from './src/app/perspective/page.tsx';
+import ServicesPage from './src/app/services/page.tsx';
+import SolutionsPage from './src/app/solutions/page.tsx';
 
-import { ModalProvider } from './src/contexts/ModalContext.js';
-import { InternalNavigationContext } from './src/contexts/InternalNavigationContext.js';
-import ClientLayoutWrapper from './src/components/common/ClientLayoutWrapper.js';
-import { SolutionProvider } from './src/contexts/SolutionContext.js';
-import { InsightProvider } from './src/contexts/InsightContext.js';
+import { ModalProvider } from './src/contexts/ModalContext.tsx';
+import { InternalNavigationContext } from './src/contexts/InternalNavigationContext.tsx';
+import ClientLayoutWrapper from './src/components/common/ClientLayoutWrapper.tsx';
+import { SolutionProvider } from './src/contexts/SolutionContext.tsx';
+import { InsightProvider } from './src/contexts/InsightContext.tsx';
 
 const App = () => {
     const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -26,7 +26,7 @@ const App = () => {
         return () => window.removeEventListener('popstate', handlePopState);
     }, []);
 
-    const navigate = (path) => {
+    const navigate = (path: string) => {
         window.history.pushState({}, '', path);
         setCurrentPath(path);
         

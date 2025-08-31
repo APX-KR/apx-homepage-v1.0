@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import Container from '../common/Container.js';
-import { useVisibility } from '../../hooks/useVisibility.js';
-import { useSolutions } from '../../contexts/SolutionContext.js';
+import Container from '../common/Container.tsx';
+import { useVisibility } from '../../hooks/useVisibility.tsx';
+import { useSolutions } from '../../contexts/SolutionContext.tsx';
 
 const problemsConfig = [
     {
@@ -143,11 +143,13 @@ const problemsConfig = [
 
 
 const ProblemSection = () => {
-    const [sectionRef, isVisible] = useVisibility({ threshold: 0.1 });
+    // FIX: Add generic type to useVisibility to fix ref type error.
+    const [sectionRef, isVisible] = useVisibility<HTMLElement>({ threshold: 0.1 });
     const [flippedStates, setFlippedStates] = useState(() => Array(problemsConfig.length).fill(false));
     const { solutions, loading } = useSolutions();
 
-    const problems = useMemo(() => {
+    // FIX: Add type for the 'problems' constant to include the optional 'solutions' property.
+    const problems: (typeof problemsConfig[0] & { solutions?: string[] })[] = useMemo(() => {
         if (loading) return problemsConfig;
 
         return problemsConfig.map(prob => {
@@ -162,7 +164,7 @@ const ProblemSection = () => {
         });
     }, [solutions, loading]);
 
-    const handleFlip = (index) => {
+    const handleFlip = (index: number) => {
         setFlippedStates(prevStates => {
             const newStates = [...prevStates];
             newStates[index] = !newStates[index];

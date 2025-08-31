@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSolutions } from '../../contexts/SolutionContext.js';
-import { useModal } from '../../contexts/ModalContext.js';
+import { useSolutions } from '../../contexts/SolutionContext.tsx';
+import { useModal } from '../../contexts/ModalContext.tsx';
 
 const categoryStyles = {
     "진단과 분석": { bg: 'bg-diagnosis-blue/10', text: 'text-diagnosis-blue', border: 'border-diagnosis-blue' },
@@ -8,7 +8,7 @@ const categoryStyles = {
     "역량 개발": { bg: 'bg-talent-orange/10', text: 'text-talent-orange', border: 'border-talent-orange' },
 };
 
-const PortfolioModal = ({ isOpen, onClose }) => {
+const PortfolioModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
     const { portfolio, togglePortfolioItem } = useSolutions();
     const { openContactModal } = useModal();
 

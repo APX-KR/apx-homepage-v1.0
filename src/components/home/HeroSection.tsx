@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Container from '../common/Container.js';
-import { useModal } from '../../contexts/ModalContext.js';
+import Container from '../common/Container.tsx';
+import { useModal } from '../../contexts/ModalContext.tsx';
 
 const HeroSection = () => {
     const { openContactModal } = useModal();

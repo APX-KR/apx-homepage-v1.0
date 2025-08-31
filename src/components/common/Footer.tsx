@@ -1,8 +1,8 @@
 import React from 'react';
-import Container from './Container.js';
-import Link from './Link.js';
+import Container from './Container.tsx';
+import Link from './Link.tsx';
 
-const FooterLink = ({ path, children }) => {
+const FooterLink = ({ path, children }: { path: string, children: React.ReactNode }) => {
     return (
         <Link href={path} className="text-white hover:opacity-80 transition-opacity duration-300 text-body-sm">
             {children}

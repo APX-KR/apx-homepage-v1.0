@@ -1,13 +1,30 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
+import { Solution } from '../types.ts';
 
-const ModalContext = createContext(undefined);
+// FIX: Define a type for the context value.
+interface ModalContextType {
+    isContactModalOpen: boolean;
+    openContactModal: (message?: string) => void;
+    closeContactModal: () => void;
+    initialMessage: string;
+    isComingSoonPopupOpen: boolean;
+    openComingSoonPopup: () => void;
+    closeComingSoonPopup: () => void;
+    isSolutionModalOpen: boolean;
+    openSolutionModal: (solution: Solution) => void;
+    closeSolutionModal: () => void;
+    selectedSolution: Solution | null;
+}
 
-export const ModalProvider = ({ children }) => {
+const ModalContext = createContext<ModalContextType | undefined>(undefined);
+
+export const ModalProvider = ({ children }: { children: ReactNode }) => {
     const [isContactModalOpen, setContactModalOpen] = useState(false);
     const [initialMessage, setInitialMessage] = useState('');
     const [isComingSoonPopupOpen, setComingSoonPopupOpen] = useState(false);
     const [isSolutionModalOpen, setSolutionModalOpen] = useState(false);
-    const [selectedSolution, setSelectedSolution] = useState(null);
+    // FIX: Type the state for the selected solution.
+    const [selectedSolution, setSelectedSolution] = useState<Solution | null>(null);
 
     const openContactModal = (message = '') => {
         setInitialMessage(message);
@@ -22,7 +39,7 @@ export const ModalProvider = ({ children }) => {
     const openComingSoonPopup = () => setComingSoonPopupOpen(true);
     const closeComingSoonPopup = () => setComingSoonPopupOpen(false);
 
-    const openSolutionModal = (solution) => {
+    const openSolutionModal = (solution: Solution) => {
         setSelectedSolution(solution);
         setSolutionModalOpen(true);
     };
