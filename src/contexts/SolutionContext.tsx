@@ -1,6 +1,7 @@
 
 import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
 import { Solution } from '../types';
+import solutionsData from '../data/solutions.json';
 
 interface SolutionContextType {
     solutions: Solution[];
@@ -13,32 +14,12 @@ interface SolutionContextType {
 
 const SolutionContext = createContext<SolutionContextType | undefined>(undefined);
 
-export const SolutionProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [solutions, setSolutions] = useState<Solution[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [portfolio, setPortfolio] = useState<Solution[]>([]);
+const activeSolutions = solutionsData.filter(s => s.status === '활성 (Active)');
 
-    useEffect(() => {
-        // In this static CSR environment, we fetch the JSON file as a static asset.
-        // This assumes the file is accessible at the specified path relative to the HTML file.
-        fetch('./src/data/solutions.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((data: Solution[]) => {
-                const activeSolutions = data.filter(s => s.status === '활성 (Active)');
-                setSolutions(activeSolutions);
-            })
-            .catch(error => {
-                console.error('Failed to load solutions data:', error);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    }, []);
+export const SolutionProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [solutions] = useState<Solution[]>(activeSolutions);
+    const [loading] = useState(false); // Data is now loaded at build time
+    const [portfolio, setPortfolio] = useState<Solution[]>([]);
 
     const getSolutionByCode = (code: string) => {
         return solutions.find(s => s.solution_code === code);
