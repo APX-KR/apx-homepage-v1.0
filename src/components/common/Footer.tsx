@@ -10,14 +10,24 @@ const FooterLink = ({ path, children }: { path: string, children: React.ReactNod
     );
 };
 
-const Footer = () => {
+const Footer = ({ path }: { path: string }) => {
+    const handleLogoClick = (e: React.MouseEvent) => {
+        const basePath = path.split('#')[0];
+        const isHomePage = basePath === '/' || basePath === '';
+        if (isHomePage) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        // If not homepage, the Link's default href behavior will navigate.
+    };
+
     return (
         <footer className="bg-apx-deep-growth text-white">
             <Container className="py-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
                     {/* Column 1: Company Info */}
                     <div className="lg:col-span-4 text-body-sm text-white">
-                        <Link href="/" className="mb-6 inline-block">
+                        <Link href="/" onClick={handleLogoClick} className="mb-6 inline-block">
                             <img src="https://storage.googleapis.com/apxhomepage-asset/APX_Logo(W).png" alt="APX Consulting Logo" className="h-10 w-auto" />
                         </Link>
                         <div className="space-y-2">

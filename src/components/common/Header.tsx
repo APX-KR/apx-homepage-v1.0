@@ -17,7 +17,7 @@ const NavLink = ({ path, children, onMouseEnter }: { path: string, children: Rea
   );
 }
 
-const Header = ({ onMegaMenuToggle }: { onMegaMenuToggle: (isOpen: boolean) => void }) => {
+const Header = ({ onMegaMenuToggle, path }: { onMegaMenuToggle: (isOpen: boolean) => void; path: string; }) => {
   const { openContactModal } = useModal();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,6 +36,17 @@ const Header = ({ onMegaMenuToggle }: { onMegaMenuToggle: (isOpen: boolean) => v
   useEffect(() => {
     onMegaMenuToggle(!!activeMenu);
   }, [activeMenu, onMegaMenuToggle]);
+  
+  const handleLogoClick = (e: React.MouseEvent) => {
+    const basePath = path.split('#')[0];
+    const isHomePage = basePath === '/' || basePath === '';
+    if (isHomePage) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // If not homepage, the Link's default href behavior will navigate.
+  };
+
 
   const navItems = [
     { name: 'APX의 관점', path: '/perspective', megaMenuKey: 'perspective' },
@@ -49,7 +60,7 @@ const Header = ({ onMegaMenuToggle }: { onMegaMenuToggle: (isOpen: boolean) => v
     <div onMouseLeave={() => setActiveMenu(null)} className="sticky top-0 z-50">
       <header className={`transition-shadow duration-300 ${isScrolled && !activeMenu ? 'soft-shadow' : ''} bg-white/80 backdrop-blur-lg`}>
         <Container className="flex items-end justify-between h-[100px] md:h-[120px] pb-6">
-          <Link href="/" className="flex items-center">
+          <Link href="/" onClick={handleLogoClick} className="flex items-center">
             <img src="https://storage.googleapis.com/apxhomepage-asset/APX_Logo(G).png" alt="APX Consulting Logo" className="h-10 w-auto" />
           </Link>
           <nav className="hidden lg:flex items-center gap-10">

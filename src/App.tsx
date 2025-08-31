@@ -91,13 +91,13 @@ const App = () => {
         <SolutionProvider>
             <InsightProvider>
                 <ModalProvider>
-                    <Header onMegaMenuToggle={setIsMegaMenuOpen} />
+                    <Header path={path} onMegaMenuToggle={setIsMegaMenuOpen} />
                     <main className={`transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${isMegaMenuOpen ? 'blur-sm pointer-events-none' : ''}`}>
                         <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
                             {renderPage()}
                         </Suspense>
                     </main>
-                    <Footer />
+                    <Footer path={path} />
                     <ContactModal />
                     <SolutionDetailModal />
                 </ModalProvider>

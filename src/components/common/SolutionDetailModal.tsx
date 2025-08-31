@@ -29,16 +29,16 @@ const SolutionDetailModal = () => {
         <div className="fixed inset-0 bg-black bg-opacity-60 z-[105] flex items-center justify-center p-4" onClick={closeSolutionModal} aria-modal="true" role="dialog">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col relative" onClick={(e) => e.stopPropagation()}>
                 {/* Header */}
-                <div className="p-6 border-b border-border-light sticky top-0 bg-white rounded-t-2xl z-10 break-keep">
+                <div className="p-6 border-b border-border-light sticky top-0 bg-white rounded-t-2xl z-10">
                     <button onClick={closeSolutionModal} className="absolute top-4 right-4 text-text-tertiary hover:text-text-primary text-3xl font-light z-10" aria-label="Close modal">&times;</button>
                     <p className="text-apx-growth-green font-semibold text-body-sm">{selectedSolution.solution_category_gnb} &gt; {selectedSolution.solution_category_5q}</p>
-                    <h3 className="text-h4 font-bold text-text-primary leading-tight tracking-tight-title mt-1">{selectedSolution.solution_name_kr}</h3>
+                    <h3 className="text-h4 font-bold text-text-primary leading-tight tracking-tight-title mt-1 break-keep">{selectedSolution.solution_name_kr}</h3>
                     <p className="text-body-base text-text-tertiary">{selectedSolution.solution_name_en}</p>
                 </div>
 
                 {/* Body */}
-                <div className="p-6 md:p-8 overflow-y-auto space-y-6 break-keep">
-                    <p className="text-body-base text-text-secondary leading-relaxed border-l-4 border-apx-growth-green pl-4">
+                <div className="p-6 md:p-8 overflow-y-auto space-y-6">
+                    <p className="text-body-base text-text-secondary leading-relaxed border-l-4 border-apx-growth-green pl-4 break-keep">
                         {selectedSolution.solution_summary}
                     </p>
                     

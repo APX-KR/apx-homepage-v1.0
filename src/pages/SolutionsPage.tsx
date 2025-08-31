@@ -132,7 +132,7 @@ export default function SolutionsPage() {
                                                 </button>
                                             </div>
                                             <h4 className="text-h5 font-bold text-text-primary leading-tight tracking-tight-title mt-[18px] mb-1">{solution.solution_name_kr}</h4>
-                                            <p className="text-body-sm text-text-secondary mb-4 leading-relaxed whitespace-pre-line">{solution.solution_summary}</p>
+                                            <p className="text-body-sm text-text-secondary mb-4 leading-relaxed break-keep">{solution.solution_summary}</p>
                                         </div>
                                         <button
                                             onClick={() => togglePortfolioItem(solution)}
