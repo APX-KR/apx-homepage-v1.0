@@ -6,6 +6,9 @@ export default defineConfig({
   plugins: [react()],
   preview: {
     port: Number(process.env.PORT) || 8080,
-    host: '0.0.0.0'
+    host: '0.0.0.0',
+    allowedHosts: [
+        'www.apxc.co.kr'
+    ]
   }
 })
