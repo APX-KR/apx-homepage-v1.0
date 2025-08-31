@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import { ModalProvider, useModal } from '../../contexts/ModalContext';
+import { useModal } from '../../contexts/ModalContext';
 import ContactModal from './ContactModal';
 
 const ComingSoonPopup: React.FC = () => {
@@ -60,8 +60,6 @@ const AppContent: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 export default function ClientLayoutWrapper({ children }: { children: React.ReactNode }) {
     return (
-        <ModalProvider>
-            <AppContent>{children}</AppContent>
-        </ModalProvider>
+        <AppContent>{children}</AppContent>
     );
 }

@@ -3,29 +3,35 @@
 import React, { useState, useEffect } from 'react';
 import Container from './Container';
 import { useModal } from '../../contexts/ModalContext';
-import { megaMenuContent } from './MegaMenuContent';
+import { useInternalNavigation } from '../../contexts/InternalNavigationContext';
+import { megaMenuComponents } from './MegaMenuContent';
 
-const NavLink: React.FC<{ href: string; children: React.ReactNode; onClick?: (e: React.MouseEvent) => void; }> = ({ href, children, onClick }) => (
-  <a
-    href={href}
-    onClick={onClick}
-    className="text-text-primary hover:text-apx-growth-green font-semibold text-body-lg tracking-tight-title relative group transition-colors duration-300 py-2 leading-tighter"
-  >
-    {children}
-    <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-apx-growth-green group-hover:w-full transition-all duration-300 ease-in-out"></span>
-  </a>
-);
+const NavLink: React.FC<{ path: string; children: React.ReactNode; onMouseEnter?: () => void; }> = ({ path, children, onMouseEnter }) => {
+  const { navigate } = useInternalNavigation();
+  return (
+    <button
+      onClick={() => navigate(path)}
+      onMouseEnter={onMouseEnter}
+      className="text-text-primary hover:text-apx-growth-green font-semibold text-body-lg tracking-tight-title relative group transition-colors duration-300 py-2 leading-tighter bg-transparent border-none cursor-pointer"
+    >
+      {children}
+      <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-apx-growth-green group-hover:w-full transition-all duration-300 ease-in-out"></span>
+    </button>
+  );
+}
 
 interface HeaderProps {
   onMegaMenuToggle: (isOpen: boolean) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ onMegaMenuToggle }) => {
-  const { openContactModal, openComingSoonPopup } = useModal();
+  const { openContactModal } = useModal();
+  const { navigate } = useInternalNavigation();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
+  const MegaMenuComponent = activeMenu ? megaMenuComponents[activeMenu] : null;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,42 +45,39 @@ const Header: React.FC<HeaderProps> = ({ onMegaMenuToggle }) => {
     onMegaMenuToggle(!!activeMenu);
   }, [activeMenu, onMegaMenuToggle]);
 
-  const handleComingSoonClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    openComingSoonPopup();
-  };
-  const handleMegaMenuClick = (e: React.MouseEvent) => e.preventDefault();
-
   const navItems = [
-    { name: 'APX의 관점', href: '#', megaMenuKey: 'perspective', onClick: handleMegaMenuClick },
-    { name: '프로젝트 솔루션', href: '#', megaMenuKey: 'projectSolutions', onClick: handleMegaMenuClick },
-    { name: '경영지원 서비스', href: '#', onClick: handleComingSoonClick },
-    { name: '인사이트', href: '#', onClick: handleComingSoonClick },
-    { name: '회사소개', href: '#', onClick: handleComingSoonClick },
+    { name: 'APX의 관점', path: '/perspective', megaMenuKey: 'perspective' },
+    { name: '프로젝트 솔루션', path: '/solutions', megaMenuKey: 'projectSolutions' },
+    { name: '경영지원 서비스', path: '/services' },
+    { name: '인사이트', path: '/insights' },
+    { name: '회사소개', path: '/about' },
   ];
 
   return (
     <div onMouseLeave={() => setActiveMenu(null)} className="sticky top-0 z-50">
       <header className={`transition-shadow duration-300 ${isScrolled && !activeMenu ? 'soft-shadow' : ''} bg-white/80 backdrop-blur-lg`}>
         <Container className="flex items-end justify-between h-[100px] md:h-[120px] pb-6">
-          <a href="https://www.apxc.co.kr" className="flex items-center">
+          <span onClick={() => navigate('/')} className="cursor-pointer flex items-center">
             <img src="https://storage.googleapis.com/apxhomepage-asset/APX_Logo(G).png" alt="APX Consulting Logo" className="h-10 w-auto" />
-          </a>
+          </span>
           <nav className="hidden lg:flex items-center gap-10">
             {navItems.map((item) => (
-              <div key={item.name} onMouseEnter={() => setActiveMenu(item.megaMenuKey || null)}>
-                <NavLink href={item.href} onClick={item.onClick}>{item.name}</NavLink>
-              </div>
+              <NavLink 
+                key={item.name} 
+                path={item.path} 
+                onMouseEnter={() => setActiveMenu(item.megaMenuKey || null)}
+              >
+                {item.name}
+              </NavLink>
             ))}
           </nav>
           <div className="hidden lg:flex items-center">
-            <a
-              href="#contact"
+            <button
               onClick={(e) => { e.preventDefault(); openContactModal(); }}
               className="px-6 py-3 bg-apx-growth-green text-white font-semibold text-body-base leading-none rounded-full border-2 border-transparent hover:bg-transparent hover:text-apx-growth-green hover:border-apx-growth-green hover:-translate-y-0.5 transform transition-all duration-300"
             >
               문의하기
-            </a>
+            </button>
           </div>
            <div className="lg:hidden">
             <button
@@ -92,25 +95,15 @@ const Header: React.FC<HeaderProps> = ({ onMegaMenuToggle }) => {
         <div className={`lg:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
             <div className="bg-white border-t border-border-light">
               {navItems.map((item) => (
-                  <a key={item.name} href={item.href} onClick={(e) => {
-                    // For mobile, items that have a mega menu on desktop will trigger the 'coming soon' popup.
-                    if (item.megaMenuKey) {
-                        e.preventDefault();
-                        openComingSoonPopup();
-                    } else if (item.onClick) {
-                        item.onClick(e);
-                    }
-                    setMobileMenuOpen(false);
-                  }} className="block px-6 py-3 text-body-base font-medium text-text-secondary hover:text-apx-growth-green hover:bg-gray-50">{item.name}</a>
+                  <span key={item.name} onClick={() => { navigate(item.path); setMobileMenuOpen(false); }} className="cursor-pointer block px-6 py-3 text-body-base font-medium text-text-secondary hover:text-apx-growth-green hover:bg-gray-50">{item.name}</span>
               ))}
               <div className="p-4">
-                 <a
-                    href="#contact"
+                 <button
                     onClick={(e) => { e.preventDefault(); openContactModal(); setMobileMenuOpen(false); }}
                     className="block w-full text-center px-6 py-3 bg-apx-growth-green text-white font-semibold text-body-base leading-none rounded-full"
                   >
                     문의하기
-                  </a>
+                  </button>
               </div>
             </div>
         </div>
@@ -122,7 +115,7 @@ const Header: React.FC<HeaderProps> = ({ onMegaMenuToggle }) => {
         }`}
       >
         <Container>
-          {activeMenu && megaMenuContent[activeMenu]}
+          {MegaMenuComponent && <MegaMenuComponent />}
         </Container>
       </div>
     </div>

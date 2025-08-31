@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import Container from '../common/Container';
 import { useModal } from '../../contexts/ModalContext';
 import { useVisibility } from '../../hooks/useVisibility';
+import { useInternalNavigation } from '../../contexts/InternalNavigationContext';
 import FloatingPortfolioButton from '../common/FloatingPortfolioButton';
 
 const categoryStyles: { [key: string]: { bg: string; text: string; border: string; } } = {
@@ -57,7 +58,8 @@ const qFilters: { key: string; label: string }[] = [
 const solutionCategories: SolutionCategory[] = ["진단과 분석", "전략 컨설팅", "역량 개발", "경영지원 (Growth OS)"];
 
 const InteractiveSection: React.FC = () => {
-    const { openContactModal, openComingSoonPopup } = useModal();
+    const { openContactModal } = useModal();
+    const { navigate } = useInternalNavigation();
     const [activeQ, setActiveQ] = useState<string>("All");
     const [portfolio, setPortfolio] = useState<Solution[]>([]);
     const [showModal, setShowModal] = useState(false);
@@ -173,14 +175,13 @@ const InteractiveSection: React.FC = () => {
                                                                  );
                                                             })}
                                                         </div>
-                                                        <a
-                                                            href="#"
-                                                            onClick={(e) => { e.preventDefault(); openComingSoonPopup(); }}
-                                                            className="shrink-0 px-3 py-1.5 bg-apx-growth-green text-white font-semibold text-caption leading-none rounded-full border-2 border-transparent hover:bg-apx-deep-growth transition-all duration-300 whitespace-nowrap"
+                                                        <button
+                                                            onClick={() => navigate('/solutions')}
+                                                            className="shrink-0 px-3 py-1.5 bg-apx-growth-green text-white font-semibold text-caption leading-none rounded-full border-2 border-transparent hover:bg-apx-deep-growth transition-all duration-300 whitespace-nowrap cursor-pointer"
                                                             aria-label={`${solution.title} 자세히 보기`}
                                                         >
                                                             자세히 보기
-                                                        </a>
+                                                        </button>
                                                     </div>
                                                     <h4 className="text-h5 font-bold text-text-primary leading-tight tracking-tight-title mt-[18px] mb-1">{solution.title}</h4>
                                                     <p className="text-body-sm text-text-secondary mb-4 leading-relaxed whitespace-pre-line">{solution.description}</p>

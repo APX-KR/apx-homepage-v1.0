@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import HeroSection from '../components/home/HeroSection';
 import ProblemSection from '../components/home/ProblemSection';

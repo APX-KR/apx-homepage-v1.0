@@ -2,31 +2,28 @@
 
 import React from 'react';
 import Container from './Container';
-import { useModal } from '../../contexts/ModalContext';
+import { useInternalNavigation } from '../../contexts/InternalNavigationContext';
 
-const FooterLink: React.FC<{ href: string, children: React.ReactNode, onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void }> = ({ href, children, onClick }) => (
-    <a href={href} onClick={onClick} className="text-white hover:opacity-80 transition-opacity duration-300 text-body-sm">
-        {children}
-    </a>
-);
+const FooterLink: React.FC<{ path: string, children: React.ReactNode }> = ({ path, children }) => {
+    const { navigate } = useInternalNavigation();
+    return (
+        <span onClick={() => navigate(path)} className="cursor-pointer text-white hover:opacity-80 transition-opacity duration-300 text-body-sm">
+            {children}
+        </span>
+    );
+};
 
 const Footer: React.FC = () => {
-    const { openComingSoonPopup } = useModal();
-
-    const handleComingSoonClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        e.preventDefault();
-        openComingSoonPopup();
-    };
-
+    const { navigate } = useInternalNavigation();
     return (
         <footer className="bg-apx-deep-growth text-white">
             <Container className="py-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-10 gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
                     {/* Column 1: Company Info */}
                     <div className="lg:col-span-4 text-body-sm text-white">
-                        <a href="https://www.apxc.co.kr" className="mb-6 inline-block">
+                        <span onClick={() => navigate('/')} className="cursor-pointer mb-6 inline-block">
                             <img src="https://storage.googleapis.com/apxhomepage-asset/APX_Logo(W).png" alt="APX Consulting Logo" className="h-10 w-auto" />
-                        </a>
+                        </span>
                         <div className="space-y-2">
                             <p className="font-semibold text-white">(주)에이피엑스컨설팅</p>
                             <p><span className="font-semibold text-white mr-2">대표이사</span>김혜숙</p>
@@ -40,9 +37,9 @@ const Footer: React.FC = () => {
                     <div className="lg:col-span-2">
                         <h3 className="font-semibold text-white mb-4 text-body-base">APX의 관점</h3>
                         <ul className="space-y-3">
-                            <li><FooterLink href="#">철학</FooterLink></li>
-                            <li><FooterLink href="#">방법론</FooterLink></li>
-                            <li><FooterLink href="#">프로세스</FooterLink></li>
+                            <li><FooterLink path="/perspective#philosophy">철학</FooterLink></li>
+                            <li><FooterLink path="/perspective#methodology">방법론</FooterLink></li>
+                            <li><FooterLink path="/perspective#process">프로세스</FooterLink></li>
                         </ul>
                     </div>
 
@@ -50,19 +47,28 @@ const Footer: React.FC = () => {
                     <div className="lg:col-span-2">
                         <h3 className="font-semibold text-white mb-4 text-body-base">프로젝트 솔루션</h3>
                         <ul className="space-y-3">
-                            <li><FooterLink href="#">진단과 분석</FooterLink></li>
-                            <li><FooterLink href="#">전략 컨설팅</FooterLink></li>
-                            <li><FooterLink href="#">역량 개발</FooterLink></li>
+                            <li><FooterLink path="/solutions#diagnose">진단과 분석</FooterLink></li>
+                            <li><FooterLink path="/solutions#strategy">전략 컨설팅</FooterLink></li>
+                            <li><FooterLink path="/solutions#development">역량 개발</FooterLink></li>
+                        </ul>
+                    </div>
+                    
+                    {/* Column 4: 경영지원 서비스 */}
+                    <div className="lg:col-span-2">
+                        <h3 className="font-semibold text-white mb-4 text-body-base">경영지원 서비스</h3>
+                        <ul className="space-y-3">
+                            <li><FooterLink path="/services">CFO 구독 서비스</FooterLink></li>
+                            <li><FooterLink path="/services">COO 구독 서비스</FooterLink></li>
+                            <li><FooterLink path="/services">경영지원 패키지</FooterLink></li>
                         </ul>
                     </div>
 
-                     {/* Column 4: 회사 */}
+                     {/* Column 5: 회사 */}
                      <div className="lg:col-span-2">
                         <h3 className="font-semibold text-white mb-4 text-body-base">회사</h3>
                         <ul className="space-y-3">
-                             <li><FooterLink href="#" onClick={handleComingSoonClick}>경영지원 서비스</FooterLink></li>
-                             <li><FooterLink href="#" onClick={handleComingSoonClick}>인사이트</FooterLink></li>
-                             <li><FooterLink href="#" onClick={handleComingSoonClick}>회사소개</FooterLink></li>
+                             <li><FooterLink path="/insights">인사이트</FooterLink></li>
+                             <li><FooterLink path="/about">회사소개</FooterLink></li>
                         </ul>
                     </div>
                 </div>
