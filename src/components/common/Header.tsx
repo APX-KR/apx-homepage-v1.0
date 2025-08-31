@@ -47,8 +47,8 @@ const Header: React.FC<HeaderProps> = ({ onMegaMenuToggle }) => {
 
   const navItems = [
     { name: 'APX의 관점', path: '/perspective', megaMenuKey: 'perspective' },
-    { name: '프로젝트 솔루션', path: '/solutions', megaMenuKey: 'projectSolutions' },
-    { name: '경영지원 서비스', path: '/services' },
+    { name: 'P&O 솔루션', path: '/solutions', megaMenuKey: 'projectSolutions' },
+    { name: 'BPO 서비스', path: '/services', megaMenuKey: 'bpoServices' },
     { name: '인사이트', path: '/insights' },
     { name: '회사소개', path: '/about' },
   ];

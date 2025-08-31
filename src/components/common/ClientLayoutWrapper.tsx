@@ -5,6 +5,7 @@ import Header from './Header';
 import Footer from './Footer';
 import { useModal } from '../../contexts/ModalContext';
 import ContactModal from './ContactModal';
+import SolutionDetailModal from './SolutionDetailModal';
 
 const ComingSoonPopup: React.FC = () => {
     const { isComingSoonPopupOpen, closeComingSoonPopup } = useModal();
@@ -54,6 +55,7 @@ const AppContent: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <Footer />
             <ContactModal />
             <ComingSoonPopup />
+            <SolutionDetailModal />
         </div>
     );
 }

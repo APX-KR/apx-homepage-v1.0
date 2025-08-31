@@ -43,9 +43,9 @@ const Footer: React.FC = () => {
                         </ul>
                     </div>
 
-                    {/* Column 3: 프로젝트 솔루션 */}
+                    {/* Column 3: P&O 솔루션 */}
                     <div className="lg:col-span-2">
-                        <h3 className="font-semibold text-white mb-4 text-body-base">프로젝트 솔루션</h3>
+                        <h3 className="font-semibold text-white mb-4 text-body-base">P&O 솔루션</h3>
                         <ul className="space-y-3">
                             <li><FooterLink path="/solutions#diagnose">진단과 분석</FooterLink></li>
                             <li><FooterLink path="/solutions#strategy">전략 컨설팅</FooterLink></li>
@@ -53,9 +53,9 @@ const Footer: React.FC = () => {
                         </ul>
                     </div>
                     
-                    {/* Column 4: 경영지원 서비스 */}
+                    {/* Column 4: BPO 서비스 */}
                     <div className="lg:col-span-2">
-                        <h3 className="font-semibold text-white mb-4 text-body-base">경영지원 서비스</h3>
+                        <h3 className="font-semibold text-white mb-4 text-body-base">BPO 서비스</h3>
                         <ul className="space-y-3">
                             <li><FooterLink path="/services">CFO 구독 서비스</FooterLink></li>
                             <li><FooterLink path="/services">COO 구독 서비스</FooterLink></li>
@@ -63,13 +63,16 @@ const Footer: React.FC = () => {
                         </ul>
                     </div>
 
-                     {/* Column 5: 회사 */}
+                     {/* Column 5: Insights & About */}
                      <div className="lg:col-span-2">
-                        <h3 className="font-semibold text-white mb-4 text-body-base">회사</h3>
-                        <ul className="space-y-3">
-                             <li><FooterLink path="/insights">인사이트</FooterLink></li>
-                             <li><FooterLink path="/about">회사소개</FooterLink></li>
-                        </ul>
+                        <div className="space-y-3">
+                            <span onClick={() => navigate('/insights')} className="cursor-pointer block font-semibold text-white text-body-base hover:opacity-80 transition-opacity duration-300">
+                                인사이트
+                            </span>
+                            <span onClick={() => navigate('/about')} className="cursor-pointer block font-semibold text-white text-body-base hover:opacity-80 transition-opacity duration-300">
+                                회사소개
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div className="mt-16 pt-8 border-t border-white/30 text-left text-white text-body-sm">

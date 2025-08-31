@@ -4,22 +4,18 @@ import React from 'react';
 import Container from '../../components/common/Container';
 import PageHeader from '../../components/common/PageHeader';
 
-const SectionCard: React.FC<{ icon: React.ReactNode; title: string; subtitle: string; children: React.ReactNode }> = ({ icon, title, subtitle, children }) => (
+const SectionCard: React.FC<{ title: string; subtitle: string; children: React.ReactNode }> = ({ title, subtitle, children }) => (
     <div className="bg-white rounded-2xl soft-shadow-lg p-8 md:p-12">
-        <div className="flex items-center gap-4 mb-6">
-            <div className="w-14 h-14 rounded-full bg-apx-growth-green/10 flex items-center justify-center text-apx-growth-green shrink-0">
-                {icon}
-            </div>
-            <div>
-                <p className="text-body-sm font-semibold text-apx-growth-green">{subtitle}</p>
-                <h3 className="text-h4 font-bold text-text-primary">{title}</h3>
-            </div>
+        <div className="mb-6">
+            <p className="text-body-sm font-semibold text-apx-growth-green">{subtitle}</p>
+            <h3 className="text-h4 font-bold text-text-primary mt-1">{title}</h3>
         </div>
-        <div className="text-body-lg text-text-secondary leading-relaxed space-y-4">
+        <div className="text-body-lg text-text-secondary leading-relaxed space-y-4 break-keep">
             {children}
         </div>
     </div>
 );
+
 
 export default function PerspectivePage() {
   return (
@@ -27,16 +23,20 @@ export default function PerspectivePage() {
       <PageHeader
         engTitle="APX'S PERSPECTIVE"
         title="문제의 현상이 아닌 원인을 해결합니다"
-        description="APX는 눈에 보이는 문제의 이면에 숨겨진 진짜 원인을 찾아내고, 일시적인 처방이 아닌 지속가능한 성장 시스템을 설계하는 것을 핵심 철학으로 삼습니다."
-        backgroundImage="https://storage.googleapis.com/apxhomepage-asset/perspective-hero-bg.png"
+        description={
+          <>
+            APX는 눈에 보이는 문제의 이면에 숨겨진 진짜 원인을 찾아내고,
+            <br />
+            일시적인 처방이 아닌 지속가능한 성장 시스템을 설계하는 것을 핵심 철학으로 삼습니다.
+          </>
+        }
       />
       <div className="py-24 md:py-32 bg-bg-secondary space-y-12">
         <Container>
             <div className="max-w-4xl mx-auto space-y-16">
-                <section id="philosophy">
+                <section id="philosophy" className="scroll-mt-[120px] md:scroll-mt-[140px]">
                     <SectionCard
-                        icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>}
-                        title="철학: 왜 원인에 집중하는가?"
+                        title="왜 원인에 집중하는가?"
                         subtitle="OUR PHILOSOPHY"
                     >
                         <p>
@@ -48,10 +48,9 @@ export default function PerspectivePage() {
                     </SectionCard>
                 </section>
 
-                <section id="methodology">
+                <section id="methodology" className="scroll-mt-[120px] md:scroll-mt-[140px]">
                     <SectionCard
-                        icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2 1M4 7l2-1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" /></svg>}
-                        title="방법론: 어떻게 답을 찾아가는가?"
+                        title="어떻게 답을 찾아가는가?"
                         subtitle="OUR METHODOLOGY"
                     >
                         <p>
@@ -63,10 +62,9 @@ export default function PerspectivePage() {
                     </SectionCard>
                 </section>
 
-                <section id="process">
+                <section id="process" className="scroll-mt-[120px] md:scroll-mt-[140px]">
                     <SectionCard
-                        icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V7a2 2 0 012-2h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V8z" /></svg>}
-                        title="프로세스: 어떻게 성과로 만드는가?"
+                        title="어떻게 성과로 만드는가?"
                         subtitle="OUR PROCESS"
                     >
                         <p>

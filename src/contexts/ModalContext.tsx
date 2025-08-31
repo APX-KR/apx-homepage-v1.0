@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useState, useContext, ReactNode } from 'react';
+import { Solution } from '../types';
 
 interface ModalContextType {
     isContactModalOpen: boolean;
@@ -10,6 +11,10 @@ interface ModalContextType {
     isComingSoonPopupOpen: boolean;
     openComingSoonPopup: () => void;
     closeComingSoonPopup: () => void;
+    isSolutionModalOpen: boolean;
+    openSolutionModal: (solution: Solution) => void;
+    closeSolutionModal: () => void;
+    selectedSolution: Solution | null;
 }
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
@@ -18,6 +23,8 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const [isContactModalOpen, setContactModalOpen] = useState(false);
     const [initialMessage, setInitialMessage] = useState('');
     const [isComingSoonPopupOpen, setComingSoonPopupOpen] = useState(false);
+    const [isSolutionModalOpen, setSolutionModalOpen] = useState(false);
+    const [selectedSolution, setSelectedSolution] = useState<Solution | null>(null);
 
     const openContactModal = (message = '') => {
         setInitialMessage(message);
@@ -32,9 +39,31 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const openComingSoonPopup = () => setComingSoonPopupOpen(true);
     const closeComingSoonPopup = () => setComingSoonPopupOpen(false);
 
+    const openSolutionModal = (solution: Solution) => {
+        setSelectedSolution(solution);
+        setSolutionModalOpen(true);
+    };
+
+    const closeSolutionModal = () => {
+        setSolutionModalOpen(false);
+        setSelectedSolution(null);
+    };
+
 
     return (
-        <ModalContext.Provider value={{ isContactModalOpen, openContactModal, closeContactModal, initialMessage, isComingSoonPopupOpen, openComingSoonPopup, closeComingSoonPopup }}>
+        <ModalContext.Provider value={{ 
+            isContactModalOpen, 
+            openContactModal, 
+            closeContactModal, 
+            initialMessage, 
+            isComingSoonPopupOpen, 
+            openComingSoonPopup, 
+            closeComingSoonPopup,
+            isSolutionModalOpen,
+            openSolutionModal,
+            closeSolutionModal,
+            selectedSolution
+        }}>
             {children}
         </ModalContext.Provider>
     );

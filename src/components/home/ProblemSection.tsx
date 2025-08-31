@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Container from '../common/Container';
 import { useVisibility } from '../../hooks/useVisibility';
+import { useSolutions } from '../../contexts/SolutionContext';
 
-const problems = [
-    { // Q1: Leadership
+const problemsConfig = [
+    {
+        category: "리더십",
         front: {
             icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-8 h-8 fill-current">
@@ -28,15 +30,11 @@ const problems = [
                 "급변하는 환경에 리더들이<br />적응하지 못하고 있습니다."
             ],
             solutionTitle: "APX는 이렇게 돕습니다",
-            solutions: [
-                "리더십 역량 모델링 및 역량 진단",
-                "직급별 리더십 프로그램",
-                "신임 리더 90일 온보딩 전략 과정"
-            ],
             gradient: "bg-gradient-to-br from-leadership-navy to-strategy-blue"
         }
     },
-    { // Q2: Organization
+    {
+        category: "조직구조",
         front: {
             icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-8 h-8 fill-current">
@@ -59,15 +57,11 @@ const problems = [
                 "전략은 좋은데, 실행 단계에서<br />항상 문제가 발생합니다."
             ],
             solutionTitle: "APX는 이렇게 돕습니다",
-            solutions: [
-                "조직 구조 진단 및 재설계",
-                "직무분석 및 적정인력 산정",
-                "고성과팀 진단 및 One-Team 워크숍"
-            ],
             gradient: "bg-gradient-to-br from-process-gray to-gray-700"
         }
     },
-    { // Q3: Talent
+    {
+        category: "인재와 역량",
         front: {
             icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-8 h-8 fill-current">
@@ -90,15 +84,11 @@ const problems = [
                 "직원들이 성장하고 있다는 느낌을<br />받지 못하는 것 같습니다."
             ],
             solutionTitle: "APX는 이렇게 돕습니다",
-            solutions: [
-                "채용 프로세스 컨설팅 및 면접관 교육",
-                "핵심인재 유지 및 육성 전략 수립",
-                "직무 역량 모델링 및 교육 체계 수립"
-            ],
             gradient: "bg-gradient-to-br from-performance-green to-apx-deep-growth"
         }
     },
-    { // Q4: Culture
+    {
+        category: "문화와 몰입",
         front: {
             icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-8 h-8 fill-current">
@@ -121,15 +111,11 @@ const problems = [
                 "세대 간의 가치관 차이로 인한<br />갈등이 점점 심해집니다."
             ],
             solutionTitle: "APX는 이렇게 돕습니다",
-            solutions: [
-                "조직문화 진단 및 혁신 로드맵 설계",
-                "핵심가치 내재화 워크숍 및 프로그램",
-                "조직 내 소통 활성화 프로그램"
-            ],
             gradient: "bg-gradient-to-br from-culture-coral to-red-500"
         }
     },
-    { // Q5: Performance
+    {
+        category: "성과관리",
         front: {
             icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" className="w-8 h-8 fill-current">
@@ -152,11 +138,6 @@ const problems = [
                 "직감이나 경험에만 의존해<br />중요한 의사결정을 내리고 있습니다."
             ],
             solutionTitle: "APX는 이렇게 돕습니다",
-            solutions: [
-                "MBO/OKR 목표관리 체계 설계",
-                "직무중심 성과체계 설계 및 도입",
-                "평가자 역량향상 프로그램"
-            ],
             gradient: "bg-gradient-to-br from-talent-orange to-orange-600"
         }
     }
@@ -165,7 +146,23 @@ const problems = [
 
 const ProblemSection: React.FC = () => {
     const [sectionRef, isVisible] = useVisibility<HTMLDivElement>({ threshold: 0.1 });
-    const [flippedStates, setFlippedStates] = useState(() => Array(problems.length).fill(false));
+    const [flippedStates, setFlippedStates] = useState(() => Array(problemsConfig.length).fill(false));
+    const { solutions, loading } = useSolutions();
+
+    const problems = useMemo(() => {
+        if (loading) return problemsConfig;
+
+        return problemsConfig.map(prob => {
+            const relevantSolutions = solutions
+                .filter(s => s.solution_category_5q === prob.category)
+                .map(s => s.solution_name_kr);
+            
+            return {
+                ...prob,
+                solutions: relevantSolutions.slice(0, 3) // Show up to 3 solutions per category
+            };
+        });
+    }, [solutions, loading]);
 
     const handleFlip = (index: number) => {
         setFlippedStates(prevStates => {
@@ -267,7 +264,7 @@ const ProblemSection: React.FC = () => {
                                         {problem.back.solutionTitle}
                                       </h4>
                                       <ul className="space-y-1.5 text-body-sm pl-1">
-                                         {problem.back.solutions.map((solution, i) => (
+                                         {(problem as any).solutions?.map((solution: string, i: number) => (
                                              <li key={i} className="flex items-start">
                                                  <span className="text-white/80 mr-2 mt-1">✓</span>
                                                  <span className="text-white/90 leading-relaxed">{solution}</span>

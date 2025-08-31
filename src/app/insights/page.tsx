@@ -1,109 +1,178 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import Container from '../../components/common/Container';
 import PageHeader from '../../components/common/PageHeader';
-
-const mockArticles = [
-  {
-    category: '리더십',
-    title: 'MZ세대 팀원들과 함께 성장하는 리더의 5가지 조건',
-    summary: '디지털 네이티브 세대인 MZ 팀원들의 잠재력을 이끌어내고, 동반 성장하기 위한 새로운 리더십 패러다임을 제시합니다.',
-    author: '김혜숙 대표',
-    date: '2024.07.15',
-    imageUrl: 'https://storage.googleapis.com/apxhomepage-asset/insight-article-01.png',
-  },
-  {
-    category: '조직문화',
-    title: '실패를 두려워하지 않는 ‘심리적 안정감’은 어떻게 만드는가?',
-    summary: '혁신적인 아이디어와 빠른 실행을 가능하게 하는 핵심 요소, 심리적 안정감. 우리 조직에 심리적 안정감을 뿌리내리는 구체적인 방법을 알아봅니다.',
-    author: 'APX 리서치팀',
-    date: '2024.06.28',
-    imageUrl: 'https://storage.googleapis.com/apxhomepage-asset/insight-article-02.png',
-  },
-  {
-    category: '성과관리',
-    title: 'OKR, 성공적으로 도입하려면 무엇부터 시작해야 할까?',
-    summary: '단순한 목표 관리 툴을 넘어, 조직 전체를 하나의 목표로 정렬시키는 OKR의 성공적인 도입을 위한 A to Z 가이드.',
-    author: '김혜숙 대표',
-    date: '2024.06.12',
-    imageUrl: 'https://storage.googleapis.com/apxhomepage-asset/insight-article-03.png',
-  },
-  {
-    category: '인재와 역량',
-    title: '우리 회사에 맞는 핵심인재, 어떻게 정의하고 유지할 것인가',
-    summary: '모든 회사에 통용되는 핵심인재는 없습니다. 우리 조직의 성장 단계와 전략에 맞는 핵심인재를 정의하고, 그들을 놓치지 않는 방법을 소개합니다.',
-    author: 'APX 리서치팀',
-    date: '2024.05.21',
-    imageUrl: 'https://storage.googleapis.com/apxhomepage-asset/insight-article-04.png',
-  },
-];
+import { useInsights } from '../../contexts/InsightContext';
+import { useInternalNavigation } from '../../contexts/InternalNavigationContext';
 
 const categoryColors: { [key: string]: string } = {
   '리더십': 'text-strategy-blue',
+  '조직구조': 'text-process-gray',
   '조직문화': 'text-culture-coral',
   '성과관리': 'text-performance-green',
   '인재와 역량': 'text-talent-orange',
 };
 
+const filters = [
+    { key: 'All', label: '전체' },
+    { key: '리더십', label: '리더십' },
+    { key: '조직구조', label: '조직구조' },
+    { key: '조직문화', label: '조직문화' },
+    { key: '성과관리', label: '성과관리' },
+    { key: '인재와 역량', label: '인재와 역량' },
+];
+
 export default function InsightsPage() {
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const { insights, loading } = useInsights();
+  const { navigate } = useInternalNavigation();
+  const articlesRef = useRef<HTMLDivElement>(null);
+
+  const ITEMS_PER_PAGE = 4;
+
+  const filteredArticles = useMemo(() => {
+    if (loading) return [];
+    return insights.filter(article => {
+      const categoryMatch = activeCategory === 'All' || article.category === activeCategory;
+      const searchMatch = searchQuery.trim() === '' ||
+        article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        article.summary.toLowerCase().includes(searchQuery.toLowerCase());
+      return categoryMatch && searchMatch;
+    });
+  }, [activeCategory, searchQuery, insights, loading]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeCategory, searchQuery]);
+
+  const totalPages = Math.ceil(filteredArticles.length / ITEMS_PER_PAGE);
+  const paginatedArticles = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredArticles.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [currentPage, filteredArticles]);
+
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+    articlesRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+  
+  const renderPagination = () => {
+    if (totalPages <= 1) return null;
+    
+    const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+    return (
+        <div className="mt-20 text-center">
+            <div className="inline-flex items-center gap-1">
+                <button 
+                    className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed" 
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    aria-label="Previous page"
+                >
+                    &lt;
+                </button>
+                {pageNumbers.map(number => (
+                    <button 
+                        key={number}
+                        className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${currentPage === number ? 'bg-apx-growth-green text-white font-bold' : 'hover:bg-gray-200'}`}
+                        onClick={() => handlePageChange(number)}
+                        aria-current={currentPage === number ? 'page' : undefined}
+                    >
+                        {number}
+                    </button>
+                ))}
+                <button 
+                    className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed" 
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    aria-label="Next page"
+                >
+                    &gt;
+                </button>
+            </div>
+        </div>
+    );
+  };
+
   return (
     <>
       <PageHeader
         engTitle="INSIGHTS"
         title="지속가능한 성장을 위한 생각들"
-        description="APX는 컨설팅 현장에서 얻은 경험과 깊이 있는 연구를 바탕으로 조직의 성장에 대한 새로운 관점과 아이디어를 공유합니다."
+        description={
+          <>
+            APX는 컨설팅 현장에서 얻은 경험과 깊이 있는 연구를 바탕으로
+            <br />
+            조직의 성장에 대한 새로운 관점과 아이디어를 공유합니다.
+          </>
+        }
       />
 
       <div className="py-24 md:py-32 bg-bg-secondary">
         <Container>
-          {/* Filter and Search Section - Placeholder */}
-          <div className="mb-16 p-6 bg-white rounded-2xl soft-shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-              <span className="font-bold text-text-primary">카테고리:</span>
-              <a href="#" className="font-semibold text-apx-growth-green hover:underline">전체</a>
-              <a href="#" className="font-medium text-text-secondary hover:text-apx-growth-green">리더십</a>
-              <a href="#" className="font-medium text-text-secondary hover:text-apx-growth-green">조직문화</a>
-              <a href="#" className="font-medium text-text-secondary hover:text-apx-growth-green">성과관리</a>
-              <a href="#" className="font-medium text-text-secondary hover:text-apx-growth-green">인재와 역량</a>
-            </div>
-            <div className="relative w-full md:max-w-xs">
-              <input type="search" placeholder="검색..." className="w-full pl-4 pr-10 py-2 border border-border-light rounded-full focus:outline-none focus:ring-2 focus:ring-apx-growth-green" />
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 absolute right-4 top-1/2 -translate-y-1/2 text-text-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
+          {/* Filter and Search Section */}
+          <div className="sticky top-[99px] z-20 bg-bg-secondary/90 backdrop-blur-lg py-4 mb-10 border-y border-border-light">
+              <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+                   <div className="flex flex-wrap justify-center md:justify-start gap-2">
+                      {filters.map(item => (
+                          <button
+                              key={item.key}
+                              onClick={() => setActiveCategory(item.key)}
+                              className={`px-5 py-2.5 text-body-sm font-semibold rounded-full transition-colors duration-300 leading-none ${activeCategory === item.key ? 'bg-apx-growth-green text-white' : 'bg-apx-growth-green/10 text-apx-deep-growth hover:bg-apx-growth-green/20'}`}
+                          >
+                              {item.label}
+                          </button>
+                      ))}
+                  </div>
+                  <div className="relative w-full md:w-auto md:min-w-[320px]">
+                      <input 
+                          type="text"
+                          placeholder="인사이트 검색 (예: 리더십, OKR)"
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          className="w-full pl-5 pr-12 py-3 border border-border-light rounded-full focus:outline-none focus:ring-2 focus:ring-apx-growth-green text-body-base bg-white"
+                      />
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 absolute right-5 top-1/2 -translate-y-1/2 text-text-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      </svg>
+                  </div>
+              </div>
           </div>
 
           {/* Articles Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {mockArticles.map((article, index) => (
-              <a href="#" key={index} className="group bg-white rounded-2xl soft-shadow-md hover:soft-shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:-translate-y-1.5">
-                <div className="aspect-video overflow-hidden">
-                    <img src={article.imageUrl} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                </div>
-                <div className="p-8 flex flex-col flex-grow">
-                  <p className={`font-bold ${categoryColors[article.category] || 'text-text-secondary'} mb-2`}>{article.category}</p>
-                  <h3 className="text-h4 font-bold text-text-primary leading-snug mb-4 flex-grow">{article.title}</h3>
-                  <p className="text-body-base text-text-secondary mb-6">{article.summary}</p>
-                  <div className="text-body-sm text-text-tertiary mt-auto">
-                    <span>{article.author}</span> · <span>{article.date}</span>
+          <div ref={articlesRef} className="grid grid-cols-1 md:grid-cols-2 gap-12 scroll-mt-28">
+            {loading ? (
+                <div className="col-span-1 md:col-span-2 text-center py-20 text-text-secondary">인사이트를 불러오는 중입니다...</div>
+            ) : paginatedArticles.length > 0 ? (
+                paginatedArticles.map((article) => (
+                  <div key={article.slug} onClick={() => navigate(`/insights/${article.slug}`)} className="group bg-white rounded-2xl soft-shadow-md hover:soft-shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:-translate-y-1.5 cursor-pointer">
+                    <div className="aspect-video overflow-hidden">
+                        <img src={article.imageUrl} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    </div>
+                    <div className="p-8 flex flex-col flex-grow">
+                      <p className={`font-bold ${categoryColors[article.category] || 'text-text-secondary'} mb-2`}>{article.category}</p>
+                      <h3 className="text-h4 font-bold text-text-primary leading-snug mb-4 flex-grow">{article.title}</h3>
+                      <p className="text-body-base text-text-secondary mb-6 break-keep">{article.summary}</p>
+                      <div className="text-body-sm text-text-tertiary mt-auto">
+                        <span>{article.author}</span> · <span>{article.date}</span>
+                      </div>
+                    </div>
                   </div>
+                ))
+            ) : (
+                <div className="col-span-1 md:col-span-2 text-center py-20">
+                    <img src="https://storage.googleapis.com/apxhomepage-asset/Search_Illustration_Empty.png" alt="No results found" className="w-48 mx-auto mb-6" />
+                    <p className="text-body-lg text-text-secondary">해당 조건에 맞는 인사이트가 없습니다.</p>
                 </div>
-              </a>
-            ))}
+            )}
           </div>
-
-          {/* Pagination - Placeholder */}
-          <div className="mt-20 text-center">
-            <div className="inline-flex items-center gap-1">
-                <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-200" disabled>&lt;</button>
-                <button className="w-10 h-10 flex items-center justify-center rounded-full bg-apx-growth-green text-white font-bold">1</button>
-                <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-200">2</button>
-                <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-200">3</button>
-                <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-200">&gt;</button>
-            </div>
-          </div>
+          
+          {!loading && renderPagination()}
         </Container>
       </div>
     </>
