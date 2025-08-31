@@ -54,4 +54,14 @@ export default function AboutPage() {
                 <h3 className="text-h5 font-bold text-talent-orange mb-3">파트너십</h3>
                 <p className="text-body-base text-text-secondary break-keep">정답을 주기보다, 고객과 함께 최적의 답을 찾아가는 과정을 중시합니다.</p>
               </div>
-              <div
+              <div className="bg-white p-8 rounded-2xl soft-shadow-md">
+                <h3 className="text-h5 font-bold text-performance-green mb-3">임팩트</h3>
+                <p className="text-body-base text-text-secondary break-keep">보고서로 끝나지 않고, 실제 조직의 행동 변화와 성과 창출로 이어지도록 돕습니다.</p>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+    </>
+  );
+}
