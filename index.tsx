@@ -1,6 +1,8 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { createRoot } from 'react-dom/client';
 
+import './src/index.css';
+
 // Dynamically import page components for code-splitting
 const Home = lazy(() => import('./src/app/page.tsx'));
 const AboutPage = lazy(() => import('./src/app/about/page.tsx'));
