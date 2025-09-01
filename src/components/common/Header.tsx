@@ -118,7 +118,7 @@ const Header = ({ onMegaMenuToggle, path }: { onMegaMenuToggle: (isOpen: boolean
         }`}
       >
         <Container>
-          {MegaMenuComponent && <MegaMenuComponent />}
+          {MegaMenuComponent && <MegaMenuComponent onLinkClick={() => setActiveMenu(null)} />}
         </Container>
       </div>
     </div>
