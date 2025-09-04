@@ -27,11 +27,11 @@ const HeroSection = () => {
                         <div>
                             <h1 className={`text-h1-mobile md:text-h1-tablet lg:text-h1 font-bold text-white leading-tight tracking-tight-title mb-6 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
                                 <span className="md:hidden">
-                                    조직의 잠재력을<br />성과로 바꾸는<br />성장 아키텍처
+                                    조직의 잠재력을<br />성과로 바꾸는<br />성장 아키텍트
                                 </span>
                                 <span className="hidden md:inline">
                                     조직의 잠재력을<br />
-                                    성과로 바꾸는 성장 아키텍처
+                                    성과로 바꾸는 성장 아키텍트
                                 </span>
                             </h1>
                             <p className={`text-body-base md:text-body-lg text-gray-200 max-w-xl mb-10 leading-relaxed transition-all duration-1000 ease-out delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
