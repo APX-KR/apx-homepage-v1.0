@@ -1,3 +1,4 @@
+
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import insightsData from '../data/insights.json';
 import { Insight } from '../types.ts';
@@ -17,7 +18,8 @@ const sortedInsights: Insight[] = [...(insightsData as Insight[])].sort((a, b) =
     return dateB - dateA;
 });
 
-export const InsightProvider = ({ children }: { children: ReactNode }) => {
+// FIX: Update InsightProvider component props type to use React.PropsWithChildren to correctly handle children and resolve TypeScript errors.
+export const InsightProvider = ({ children }: React.PropsWithChildren<{}>) => {
     const [insights] = useState<Insight[]>(sortedInsights);
     const [loading] = useState(false); // Data is now loaded at build time
 

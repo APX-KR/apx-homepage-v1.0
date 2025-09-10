@@ -1,10 +1,12 @@
+
 import React, { useState, useEffect } from 'react';
 import Container from './Container.tsx';
 import { useModal } from '../../contexts/ModalContext.tsx';
 import { megaMenuComponents } from './MegaMenuContent.tsx';
 import Link from './Link.tsx';
 
-const NavLink = ({ path, children, onMouseEnter }: { path: string, children: React.ReactNode, onMouseEnter: () => void }) => {
+// FIX: Update NavLink component props type to use React.PropsWithChildren to correctly handle children and resolve TypeScript errors related to the 'key' prop.
+const NavLink = ({ path, children, onMouseEnter }: React.PropsWithChildren<{ path: string, onMouseEnter: () => void }>) => {
   return (
     <Link
       href={path}

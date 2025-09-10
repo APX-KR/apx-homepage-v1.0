@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useModal } from '../../contexts/ModalContext.tsx';
 import PrivacyPolicyModal from './PrivacyPolicyModal.tsx';
@@ -51,7 +52,7 @@ const ContactModal = () => {
 
     const isFormValid = name && company && department && email && phone && message && agreed;
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement | HTMLButtonElement>) => {
         e.preventDefault();
         if (!isFormValid) return;
 

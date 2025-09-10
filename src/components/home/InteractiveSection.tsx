@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import Container from '../common/Container.tsx';
 import { useModal } from '../../contexts/ModalContext.tsx';
@@ -125,7 +126,8 @@ const InteractiveSection = () => {
                     {loading ? (
                         <div className="text-center py-20 text-text-secondary">솔루션을 불러오는 중입니다...</div>
                     ) : Object.keys(groupedSolutions).length > 0 ? (
-                        Object.entries(groupedSolutions).map(([category, solutions]) => (
+                        // FIX: Cast the result of Object.entries to correctly type `solutions` as Solution[] and prevent `unknown` type error.
+                        (Object.entries(groupedSolutions) as [string, Solution[]][]).map(([category, solutions]) => (
                             <div key={category}>
                                 <h3 className="text-h4 font-bold text-text-primary mb-8 border-b-2 border-apx-growth-green pb-4">{category}</h3>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -1,7 +1,9 @@
+
 import React from 'react';
 import { useModal } from '../../contexts/ModalContext.tsx';
 
-const DetailSection = ({ title, children }: { title: string, children: React.ReactNode }) => {
+// FIX: Update DetailSection component props type to use React.PropsWithChildren to correctly handle children and resolve TypeScript errors.
+const DetailSection = ({ title, children }: React.PropsWithChildren<{ title: string }>) => {
     if (!children) return null;
     return (
         <div>

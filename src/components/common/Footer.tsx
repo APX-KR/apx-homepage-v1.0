@@ -1,8 +1,10 @@
+
 import React from 'react';
 import Container from './Container.tsx';
 import Link from './Link.tsx';
 
-const FooterLink = ({ path, children }: { path: string, children: React.ReactNode }) => {
+// FIX: Update FooterLink component props type to use React.PropsWithChildren to correctly handle children and resolve TypeScript errors.
+const FooterLink = ({ path, children }: React.PropsWithChildren<{ path: string }>) => {
     return (
         <Link href={path} className="text-white hover:opacity-80 transition-opacity duration-300 text-body-sm">
             {children}

@@ -1,3 +1,4 @@
+
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { Solution } from '../types.ts';
 
@@ -17,7 +18,8 @@ interface ModalContextType {
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
-export const ModalProvider = ({ children }: { children: ReactNode }) => {
+// FIX: Update ModalProvider component props type to use React.PropsWithChildren to correctly handle children and resolve TypeScript errors.
+export const ModalProvider = ({ children }: React.PropsWithChildren<{}>) => {
     const [isContactModalOpen, setContactModalOpen] = useState(false);
     const [initialMessage, setInitialMessage] = useState('');
     const [isComingSoonPopupOpen, setComingSoonPopupOpen] = useState(false);
